@@ -32,8 +32,8 @@
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Kavkaz228/allur-twin)
 
-Кнопка создаёт собственную копию демо в аккаунте Render: укажите `JURY_PASSWORD` (парольная фраза от 15 символов),
-через 5–10 минут откройте выданный адрес и войдите как `jury`. Подробности — [deploy/demo/README.md](deploy/demo/README.md).
+Кнопка создаёт собственную копию демо в аккаунте Render; пароль Render придумает сам. Через 5–10 минут откройте
+выданный адрес и войдите как `jury` с паролем из Render → allur-twin-demo → Environment → `JURY_PASSWORD`. Подробности — [deploy/demo/README.md](deploy/demo/README.md).
 
 ## Технологии
 
