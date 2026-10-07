@@ -1,0 +1,47 @@
+import {test,expect} from '@playwright/test';
+import {readFileSync} from 'node:fs';
+import {randomUUID} from 'node:crypto';
+
+test('archive stand: shared time, nodes, conveyor fault, repair, acknowledgment and restart',async({page,context},info)=>{
+  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+  const csrf=readFileSync('/tmp/allur-csrf','utf8');
+  const command=async(action:string,extra={})=>{
+    const s=await (await page.request.get('/api/emulation')).json();
+    const r=await page.request.post('/api/emulation/commands',{headers:{'X-CSRF-Token':csrf},data:{request_id:randomUUID(),expected_revision:s.revision,action,...extra}});
+    expect(r.ok(),await r.text()).toBeTruthy();
+  };
+  await command('reset');
+  await page.goto('/');await page.getByTestId('nav-scada').click();await page.getByRole('button',{name:'Эмуляция',exact:true}).click();
+  await expect(page.getByRole('heading',{name:'Эмуляция роботов и конвейера'})).toBeVisible();
+  await expect(page.getByRole('group',{name:'Кинематическая схема робота R1'})).toBeVisible();
+  await page.getByRole('button',{name:'Рассчитать 10 минут',exact:true}).click();
+  await expect(page.getByText('Собрано кузовов',{exact:true}).locator('..').getByText('10',{exact:true})).toBeVisible();
+  await expect(page.getByRole('img',{name:'График: Температура обмотки'})).toBeVisible();
+  await page.getByRole('button',{name:'Запустить эмуляцию',exact:true}).click();
+  await expect(page.getByRole('button',{name:'Пауза эмуляции',exact:true})).toBeVisible();
+  const other=await context.newPage();await other.goto('/');await other.getByTestId('nav-scada').click();await other.getByRole('button',{name:'Эмуляция',exact:true}).click();
+  await expect(other.getByRole('button',{name:'Пауза эмуляции',exact:true})).toBeVisible();
+  await page.getByRole('button',{name:'Ввести: Сбит датчик позиции',exact:true}).click();
+  await expect(page.getByTestId('emulation-status')).toContainText('Линия остановлена');
+  await expect(other.getByTestId('emulation-status')).toContainText('Линия остановлена');
+  await expect(page.getByRole('button',{name:'Квитировать CV-pos',exact:true})).toBeDisabled();
+  await expect(page.getByRole('button',{name:'Пуск линии после аварии',exact:true})).toBeDisabled();
+  await page.getByRole('button',{name:/^CV · Конвейер/}).click();await page.getByRole('button',{name:'Позиционирование',exact:true}).click();
+  await page.getByRole('button',{name:/^Датчики позиции кузова/}).click();
+  await expect(page.getByRole('img',{name:'График: Ошибка позиции кузова'})).toBeVisible();
+  await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:info.outputPath('emulation-fault.png'),fullPage:true,animations:'disabled'});
+  await page.getByRole('button',{name:'Устранить: Сбит датчик позиции',exact:true}).click();
+  await expect(page.getByRole('button',{name:'Квитировать CV-pos',exact:true})).toBeEnabled();
+  await page.getByRole('button',{name:'Квитировать CV-pos',exact:true}).click();
+  await expect(page.getByRole('button',{name:'Пуск линии после аварии',exact:true})).toBeEnabled();
+  await page.getByRole('button',{name:'Пуск линии после аварии',exact:true}).click();
+  await expect(page.getByTestId('emulation-status')).toContainText('Линия в работе');
+  await page.getByRole('button',{name:'Пауза эмуляции',exact:true}).click();
+  await page.reload();await page.getByTestId('nav-scada').click();await page.getByRole('button',{name:'Эмуляция',exact:true}).click();
+  await expect(page.getByTestId('emulation-status')).toContainText('Время на паузе');
+  await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:info.outputPath('emulation-desktop.png'),fullPage:true,animations:'disabled'});
+  await page.setViewportSize({width:390,height:844});await page.emulateMedia({reducedMotion:'reduce'});
+  await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:info.outputPath('emulation-mobile.png'),fullPage:true,animations:'disabled'});
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1)).toBeTruthy();
+  expect(errors).toEqual([]);await other.close();
+});

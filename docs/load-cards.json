@@ -1,0 +1,20 @@
+{
+  "users": 450,
+  "load_generator_processes": 6,
+  "duration_seconds": 182.14,
+  "known_robots_before": 810,
+  "stored_measurements_before": 367832,
+  "dashboard_requests": 40500,
+  "dashboard_rps": 225.0,
+  "dashboard_p50_ms": 4.53,
+  "dashboard_p95_ms": 79.58,
+  "dashboard_p99_ms": 195.26,
+  "robot_detail_requests": 40500,
+  "robot_detail_p95_ms": 60.15,
+  "ingestion_batches": 180,
+  "measurements_sent": 18000,
+  "warmup_measurements": 100,
+  "ingestion_p95_ms": 188.14,
+  "mean_dashboard_bytes": 318749,
+  "errors": {}
+}

@@ -1,0 +1,17 @@
+# Render Blueprint: free online demo of Allur twin built from deploy/demo/Dockerfile.
+# Render asks for JURY_PASSWORD (15+ characters) when the Blueprint is created.
+services:
+  - type: web
+    name: allur-twin-demo
+    runtime: docker
+    plan: free
+    dockerfilePath: ./deploy/demo/Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    envVars:
+      - key: JURY_PASSWORD
+        sync: false
+      - key: JURY_USERNAME
+        value: jury
+      - key: JURY_ROLE
+        value: operator

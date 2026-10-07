@@ -1,0 +1,23 @@
+{
+  "users": 450,
+  "secondary_view": "emulation",
+  "secondary_requests": 40500,
+  "secondary_p95_ms": 98.61,
+  "load_generator_processes": 6,
+  "duration_seconds": 182.15,
+  "known_robots_before": 5,
+  "stored_measurements_before": 18,
+  "dashboard_requests": 40500,
+  "dashboard_rps": 225.0,
+  "dashboard_p50_ms": 4.4,
+  "dashboard_p95_ms": 113.75,
+  "dashboard_p99_ms": 181.65,
+  "robot_detail_requests": 40500,
+  "robot_detail_p95_ms": 98.61,
+  "ingestion_batches": 180,
+  "measurements_sent": 18000,
+  "warmup_measurements": 100,
+  "ingestion_p95_ms": 295.3,
+  "mean_dashboard_bytes": 80842,
+  "errors": {}
+}

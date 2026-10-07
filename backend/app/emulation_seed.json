@@ -1,0 +1,2935 @@
+{
+  "stations": [
+    {
+      "n": 1,
+      "robot": "R1",
+      "name": "Остекление",
+      "op": "Вклейка лобового стекла",
+      "payload": "Стекло 18 кг и вакуумный захват",
+      "tool": "вакуумный захват на 4 присосках",
+      "shape": "glass",
+      "load": [
+        0.45,
+        0.7,
+        0.62,
+        0.4,
+        0.45,
+        0.35
+      ],
+      "speed": 0.55,
+      "tools": [
+        {
+          "sub": "cups",
+          "name": "Присоски 150 мм, 4 шт.",
+          "part": "VAC-CUP",
+          "wear": 0.88,
+          "perCar": 1,
+          "rated": 250000
+        },
+        {
+          "sub": "ejector",
+          "name": "Вакуумный эжектор",
+          "part": "VAC-EJ",
+          "wear": 0.4,
+          "hours": 20000
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "robot": "R2",
+      "name": "Колёса",
+      "op": "Установка колёс",
+      "payload": "Колесо 21 кг и гайковёрт",
+      "tool": "многошпиндельный гайковёрт с контролем момента",
+      "shape": "wheel",
+      "load": [
+        0.4,
+        0.65,
+        0.58,
+        0.38,
+        0.42,
+        0.4
+      ],
+      "speed": 0.6,
+      "tools": [
+        {
+          "sub": "spindles",
+          "name": "Шпиндели гайковёрта, 5 шт.",
+          "part": "NUT-SPN",
+          "wear": 0.62,
+          "perCar": 2,
+          "rated": 1200000
+        },
+        {
+          "sub": "calib",
+          "name": "Калибровка датчика момента",
+          "part": "TQ-CAL",
+          "wear": 0.86,
+          "hours": 2000
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "robot": "R3",
+      "name": "Сиденья",
+      "op": "Установка сидений через дверной проём",
+      "payload": "Сиденье 27 кг и захват",
+      "tool": "пневматический захват сиденья",
+      "shape": "seat",
+      "load": [
+        0.5,
+        0.78,
+        0.7,
+        0.42,
+        0.5,
+        0.38
+      ],
+      "speed": 0.5,
+      "tools": [
+        {
+          "sub": "cyl",
+          "name": "Пневмоцилиндры захвата",
+          "part": "CYL-KIT",
+          "wear": 0.55,
+          "perCar": 4,
+          "rated": 5000000
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "robot": "R4",
+      "name": "Тяжёлые узлы",
+      "op": "Установка модуля панели приборов",
+      "payload": "Модуль 48 кг и захват",
+      "tool": "захват модуля с пневмозажимами",
+      "shape": "module",
+      "load": [
+        0.55,
+        0.85,
+        0.76,
+        0.45,
+        0.52,
+        0.4
+      ],
+      "speed": 0.45,
+      "tools": [
+        {
+          "sub": "clamps",
+          "name": "Зажимы захвата модуля",
+          "part": "CLAMP-KIT",
+          "wear": 0.38,
+          "perCar": 2,
+          "rated": 3000000
+        }
+      ]
+    }
+  ],
+  "components": [
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R1",
+      "node": "J1",
+      "load": 0.45,
+      "speed": 0.55,
+      "id": "R1-J1-mot",
+      "kind": "motor",
+      "name": "Серводвигатель J1",
+      "part": "MOT-L",
+      "wear": 0.236
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R1",
+      "node": "J1",
+      "load": 0.45,
+      "speed": 0.55,
+      "id": "R1-J1-red",
+      "kind": "reducer",
+      "name": "Редуктор J1",
+      "part": "RED-L",
+      "wear": 0.31
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R1",
+      "node": "J1",
+      "load": 0.45,
+      "speed": 0.55,
+      "id": "R1-J1-brk",
+      "kind": "brake",
+      "name": "Тормоз J1",
+      "part": "BRK",
+      "wear": 0.2825
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R1",
+      "node": "J2",
+      "load": 0.7,
+      "speed": 0.55,
+      "id": "R1-J2-mot",
+      "kind": "motor",
+      "name": "Серводвигатель J2",
+      "part": "MOT-L",
+      "wear": 0.33799999999999997
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R1",
+      "node": "J2",
+      "load": 0.7,
+      "speed": 0.55,
+      "id": "R1-J2-red",
+      "kind": "reducer",
+      "name": "Редуктор J2",
+      "part": "RED-L",
+      "wear": 0.48
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R1",
+      "node": "J2",
+      "load": 0.7,
+      "speed": 0.55,
+      "id": "R1-J2-brk",
+      "kind": "brake",
+      "name": "Тормоз J2",
+      "part": "BRK",
+      "wear": 0.41
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R1",
+      "node": "J3",
+      "load": 0.62,
+      "speed": 0.55,
+      "id": "R1-J3-mot",
+      "kind": "motor",
+      "name": "Серводвигатель J3",
+      "part": "MOT-L",
+      "wear": 0.314
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R1",
+      "node": "J3",
+      "load": 0.62,
+      "speed": 0.55,
+      "id": "R1-J3-red",
+      "kind": "reducer",
+      "name": "Редуктор J3",
+      "part": "RED-L",
+      "wear": 0.44
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R1",
+      "node": "J3",
+      "load": 0.62,
+      "speed": 0.55,
+      "id": "R1-J3-brk",
+      "kind": "brake",
+      "name": "Тормоз J3",
+      "part": "BRK",
+      "wear": 0.38
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R1",
+      "node": "J4",
+      "load": 0.4,
+      "speed": 0.55,
+      "id": "R1-J4-mot",
+      "kind": "motor",
+      "name": "Серводвигатель J4",
+      "part": "MOT-S",
+      "wear": 0.182
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R1",
+      "node": "J4",
+      "load": 0.4,
+      "speed": 0.55,
+      "id": "R1-J4-red",
+      "kind": "reducer",
+      "name": "Редуктор J4",
+      "part": "RED-S",
+      "wear": 0.22
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R1",
+      "node": "J4",
+      "load": 0.4,
+      "speed": 0.55,
+      "id": "R1-J4-brk",
+      "kind": "brake",
+      "name": "Тормоз J4",
+      "part": "BRK",
+      "wear": 0.21500000000000002
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R1",
+      "node": "J5",
+      "load": 0.45,
+      "speed": 0.55,
+      "id": "R1-J5-mot",
+      "kind": "motor",
+      "name": "Серводвигатель J5",
+      "part": "MOT-S",
+      "wear": 0.21800000000000003
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R1",
+      "node": "J5",
+      "load": 0.45,
+      "speed": 0.55,
+      "id": "R1-J5-red",
+      "kind": "reducer",
+      "name": "Редуктор J5",
+      "part": "RED-S",
+      "wear": 0.28
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R1",
+      "node": "J5",
+      "load": 0.45,
+      "speed": 0.55,
+      "id": "R1-J5-brk",
+      "kind": "brake",
+      "name": "Тормоз J5",
+      "part": "BRK",
+      "wear": 0.26
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R1",
+      "node": "J6",
+      "load": 0.35,
+      "speed": 0.55,
+      "id": "R1-J6-mot",
+      "kind": "motor",
+      "name": "Серводвигатель J6",
+      "part": "MOT-S",
+      "wear": 0.16399999999999998
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R1",
+      "node": "J6",
+      "load": 0.35,
+      "speed": 0.55,
+      "id": "R1-J6-red",
+      "kind": "reducer",
+      "name": "Редуктор J6",
+      "part": "RED-S",
+      "wear": 0.19
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R1",
+      "node": "J6",
+      "load": 0.35,
+      "speed": 0.55,
+      "id": "R1-J6-brk",
+      "kind": "brake",
+      "name": "Тормоз J6",
+      "part": "BRK",
+      "wear": 0.1925
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R1",
+      "node": "cable",
+      "id": "R1-cablo",
+      "kind": "cable",
+      "name": "Кабельный пакет J1–J3",
+      "part": "CAB-LO",
+      "wear": 0.35,
+      "flex": 3,
+      "rated": 15000000
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R1",
+      "node": "cable",
+      "id": "R1-cabup",
+      "kind": "cable",
+      "name": "Кабельный пакет J4–J6",
+      "part": "CAB-UP",
+      "wear": 0.52,
+      "flex": 6,
+      "rated": 10000000,
+      "upper": true
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R1",
+      "node": "ctrl",
+      "id": "R1-bat",
+      "kind": "battery",
+      "name": "Батарея энкодеров",
+      "part": "ENC-BAT",
+      "wear": 0.91
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R1",
+      "node": "ctrl",
+      "id": "R1-fan",
+      "kind": "fan",
+      "name": "Вентилятор шкафа",
+      "part": "FAN",
+      "wear": 0.3
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R1",
+      "node": "tool",
+      "kind": "tool",
+      "sub": "cups",
+      "name": "Присоски 150 мм, 4 шт.",
+      "part": "VAC-CUP",
+      "wear": 0.88,
+      "perCar": 1,
+      "rated": 250000,
+      "id": "R1-cups"
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R1",
+      "node": "tool",
+      "kind": "tool",
+      "sub": "ejector",
+      "name": "Вакуумный эжектор",
+      "part": "VAC-EJ",
+      "wear": 0.4,
+      "hours": 20000,
+      "id": "R1-ejector"
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R2",
+      "node": "J1",
+      "load": 0.4,
+      "speed": 0.6,
+      "id": "R2-J1-mot",
+      "kind": "motor",
+      "name": "Серводвигатель J1",
+      "part": "MOT-L",
+      "wear": 0.266
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R2",
+      "node": "J1",
+      "load": 0.4,
+      "speed": 0.6,
+      "id": "R2-J1-red",
+      "kind": "reducer",
+      "name": "Редуктор J1",
+      "part": "RED-L",
+      "wear": 0.36
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R2",
+      "node": "J1",
+      "load": 0.4,
+      "speed": 0.6,
+      "id": "R2-J1-brk",
+      "kind": "brake",
+      "name": "Тормоз J1",
+      "part": "BRK",
+      "wear": 0.32
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R2",
+      "node": "J2",
+      "load": 0.65,
+      "speed": 0.6,
+      "id": "R2-J2-mot",
+      "kind": "motor",
+      "name": "Серводвигатель J2",
+      "part": "MOT-L",
+      "wear": 0.39799999999999996
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R2",
+      "node": "J2",
+      "load": 0.65,
+      "speed": 0.6,
+      "id": "R2-J2-red",
+      "kind": "reducer",
+      "name": "Редуктор J2",
+      "part": "RED-L",
+      "wear": 0.58
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R2",
+      "node": "J2",
+      "load": 0.65,
+      "speed": 0.6,
+      "id": "R2-J2-brk",
+      "kind": "brake",
+      "name": "Тормоз J2",
+      "part": "BRK",
+      "wear": 0.48499999999999993
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R2",
+      "node": "J3",
+      "load": 0.58,
+      "speed": 0.6,
+      "id": "R2-J3-mot",
+      "kind": "motor",
+      "name": "Серводвигатель J3",
+      "part": "MOT-L",
+      "wear": 0.6080000000000001
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R2",
+      "node": "J3",
+      "load": 0.58,
+      "speed": 0.6,
+      "id": "R2-J3-red",
+      "kind": "reducer",
+      "name": "Редуктор J3",
+      "part": "RED-L",
+      "wear": 0.93
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R2",
+      "node": "J3",
+      "load": 0.58,
+      "speed": 0.6,
+      "id": "R2-J3-brk",
+      "kind": "brake",
+      "name": "Тормоз J3",
+      "part": "BRK",
+      "wear": 0.7475
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R2",
+      "node": "J4",
+      "load": 0.38,
+      "speed": 0.6,
+      "id": "R2-J4-mot",
+      "kind": "motor",
+      "name": "Серводвигатель J4",
+      "part": "MOT-S",
+      "wear": 0.22999999999999998
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R2",
+      "node": "J4",
+      "load": 0.38,
+      "speed": 0.6,
+      "id": "R2-J4-red",
+      "kind": "reducer",
+      "name": "Редуктор J4",
+      "part": "RED-S",
+      "wear": 0.3
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R2",
+      "node": "J4",
+      "load": 0.38,
+      "speed": 0.6,
+      "id": "R2-J4-brk",
+      "kind": "brake",
+      "name": "Тормоз J4",
+      "part": "BRK",
+      "wear": 0.27499999999999997
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R2",
+      "node": "J5",
+      "load": 0.42,
+      "speed": 0.6,
+      "id": "R2-J5-mot",
+      "kind": "motor",
+      "name": "Серводвигатель J5",
+      "part": "MOT-S",
+      "wear": 0.248
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R2",
+      "node": "J5",
+      "load": 0.42,
+      "speed": 0.6,
+      "id": "R2-J5-red",
+      "kind": "reducer",
+      "name": "Редуктор J5",
+      "part": "RED-S",
+      "wear": 0.33
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R2",
+      "node": "J5",
+      "load": 0.42,
+      "speed": 0.6,
+      "id": "R2-J5-brk",
+      "kind": "brake",
+      "name": "Тормоз J5",
+      "part": "BRK",
+      "wear": 0.2975
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R2",
+      "node": "J6",
+      "load": 0.4,
+      "speed": 0.6,
+      "id": "R2-J6-mot",
+      "kind": "motor",
+      "name": "Серводвигатель J6",
+      "part": "MOT-S",
+      "wear": 0.21200000000000002
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R2",
+      "node": "J6",
+      "load": 0.4,
+      "speed": 0.6,
+      "id": "R2-J6-red",
+      "kind": "reducer",
+      "name": "Редуктор J6",
+      "part": "RED-S",
+      "wear": 0.27
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R2",
+      "node": "J6",
+      "load": 0.4,
+      "speed": 0.6,
+      "id": "R2-J6-brk",
+      "kind": "brake",
+      "name": "Тормоз J6",
+      "part": "BRK",
+      "wear": 0.2525
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R2",
+      "node": "cable",
+      "id": "R2-cablo",
+      "kind": "cable",
+      "name": "Кабельный пакет J1–J3",
+      "part": "CAB-LO",
+      "wear": 0.29,
+      "flex": 3,
+      "rated": 15000000
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R2",
+      "node": "cable",
+      "id": "R2-cabup",
+      "kind": "cable",
+      "name": "Кабельный пакет J4–J6",
+      "part": "CAB-UP",
+      "wear": 0.47,
+      "flex": 6,
+      "rated": 10000000,
+      "upper": true
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R2",
+      "node": "ctrl",
+      "id": "R2-bat",
+      "kind": "battery",
+      "name": "Батарея энкодеров",
+      "part": "ENC-BAT",
+      "wear": 0.45
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R2",
+      "node": "ctrl",
+      "id": "R2-fan",
+      "kind": "fan",
+      "name": "Вентилятор шкафа",
+      "part": "FAN",
+      "wear": 0.5
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R2",
+      "node": "tool",
+      "kind": "tool",
+      "sub": "spindles",
+      "name": "Шпиндели гайковёрта, 5 шт.",
+      "part": "NUT-SPN",
+      "wear": 0.62,
+      "perCar": 2,
+      "rated": 1200000,
+      "id": "R2-spindles"
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R2",
+      "node": "tool",
+      "kind": "tool",
+      "sub": "calib",
+      "name": "Калибровка датчика момента",
+      "part": "TQ-CAL",
+      "wear": 0.86,
+      "hours": 2000,
+      "id": "R2-calib"
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R3",
+      "node": "J1",
+      "load": 0.5,
+      "speed": 0.5,
+      "id": "R3-J1-mot",
+      "kind": "motor",
+      "name": "Серводвигатель J1",
+      "part": "MOT-L",
+      "wear": 0.21800000000000003
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R3",
+      "node": "J1",
+      "load": 0.5,
+      "speed": 0.5,
+      "id": "R3-J1-red",
+      "kind": "reducer",
+      "name": "Редуктор J1",
+      "part": "RED-L",
+      "wear": 0.28
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R3",
+      "node": "J1",
+      "load": 0.5,
+      "speed": 0.5,
+      "id": "R3-J1-brk",
+      "kind": "brake",
+      "name": "Тормоз J1",
+      "part": "BRK",
+      "wear": 0.26
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R3",
+      "node": "J2",
+      "load": 0.78,
+      "speed": 0.5,
+      "id": "R3-J2-mot",
+      "kind": "motor",
+      "name": "Серводвигатель J2",
+      "part": "MOT-L",
+      "wear": 0.416
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R3",
+      "node": "J2",
+      "load": 0.78,
+      "speed": 0.5,
+      "id": "R3-J2-red",
+      "kind": "reducer",
+      "name": "Редуктор J2",
+      "part": "RED-L",
+      "wear": 0.61
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R3",
+      "node": "J2",
+      "load": 0.78,
+      "speed": 0.5,
+      "id": "R3-J2-brk",
+      "kind": "brake",
+      "name": "Тормоз J2",
+      "part": "BRK",
+      "wear": 0.5075000000000001
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R3",
+      "node": "J3",
+      "load": 0.7,
+      "speed": 0.5,
+      "id": "R3-J3-mot",
+      "kind": "motor",
+      "name": "Серводвигатель J3",
+      "part": "MOT-L",
+      "wear": 0.39199999999999996
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R3",
+      "node": "J3",
+      "load": 0.7,
+      "speed": 0.5,
+      "id": "R3-J3-red",
+      "kind": "reducer",
+      "name": "Редуктор J3",
+      "part": "RED-L",
+      "wear": 0.57
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R3",
+      "node": "J3",
+      "load": 0.7,
+      "speed": 0.5,
+      "id": "R3-J3-brk",
+      "kind": "brake",
+      "name": "Тормоз J3",
+      "part": "BRK",
+      "wear": 0.4775
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R3",
+      "node": "J4",
+      "load": 0.42,
+      "speed": 0.5,
+      "id": "R3-J4-mot",
+      "kind": "motor",
+      "name": "Серводвигатель J4",
+      "part": "MOT-S",
+      "wear": 0.2
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R3",
+      "node": "J4",
+      "load": 0.42,
+      "speed": 0.5,
+      "id": "R3-J4-red",
+      "kind": "reducer",
+      "name": "Редуктор J4",
+      "part": "RED-S",
+      "wear": 0.25
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R3",
+      "node": "J4",
+      "load": 0.42,
+      "speed": 0.5,
+      "id": "R3-J4-brk",
+      "kind": "brake",
+      "name": "Тормоз J4",
+      "part": "BRK",
+      "wear": 0.2375
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R3",
+      "node": "J5",
+      "load": 0.5,
+      "speed": 0.5,
+      "id": "R3-J5-mot",
+      "kind": "motor",
+      "name": "Серводвигатель J5",
+      "part": "MOT-S",
+      "wear": 0.22999999999999998
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R3",
+      "node": "J5",
+      "load": 0.5,
+      "speed": 0.5,
+      "id": "R3-J5-red",
+      "kind": "reducer",
+      "name": "Редуктор J5",
+      "part": "RED-S",
+      "wear": 0.3
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R3",
+      "node": "J5",
+      "load": 0.5,
+      "speed": 0.5,
+      "id": "R3-J5-brk",
+      "kind": "brake",
+      "name": "Тормоз J5",
+      "part": "BRK",
+      "wear": 0.27499999999999997
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R3",
+      "node": "J6",
+      "load": 0.38,
+      "speed": 0.5,
+      "id": "R3-J6-mot",
+      "kind": "motor",
+      "name": "Серводвигатель J6",
+      "part": "MOT-S",
+      "wear": 0.176
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R3",
+      "node": "J6",
+      "load": 0.38,
+      "speed": 0.5,
+      "id": "R3-J6-red",
+      "kind": "reducer",
+      "name": "Редуктор J6",
+      "part": "RED-S",
+      "wear": 0.21
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R3",
+      "node": "J6",
+      "load": 0.38,
+      "speed": 0.5,
+      "id": "R3-J6-brk",
+      "kind": "brake",
+      "name": "Тормоз J6",
+      "part": "BRK",
+      "wear": 0.20750000000000002
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R3",
+      "node": "cable",
+      "id": "R3-cablo",
+      "kind": "cable",
+      "name": "Кабельный пакет J1–J3",
+      "part": "CAB-LO",
+      "wear": 0.41,
+      "flex": 3,
+      "rated": 15000000
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R3",
+      "node": "cable",
+      "id": "R3-cabup",
+      "kind": "cable",
+      "name": "Кабельный пакет J4–J6",
+      "part": "CAB-UP",
+      "wear": 0.64,
+      "flex": 6,
+      "rated": 10000000,
+      "upper": true
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R3",
+      "node": "ctrl",
+      "id": "R3-bat",
+      "kind": "battery",
+      "name": "Батарея энкодеров",
+      "part": "ENC-BAT",
+      "wear": 0.3
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R3",
+      "node": "ctrl",
+      "id": "R3-fan",
+      "kind": "fan",
+      "name": "Вентилятор шкафа",
+      "part": "FAN",
+      "wear": 0.77
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R3",
+      "node": "tool",
+      "kind": "tool",
+      "sub": "cyl",
+      "name": "Пневмоцилиндры захвата",
+      "part": "CYL-KIT",
+      "wear": 0.55,
+      "perCar": 4,
+      "rated": 5000000,
+      "id": "R3-cyl"
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R4",
+      "node": "J1",
+      "load": 0.55,
+      "speed": 0.45,
+      "id": "R4-J1-mot",
+      "kind": "motor",
+      "name": "Серводвигатель J1",
+      "part": "MOT-L",
+      "wear": 0.29
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R4",
+      "node": "J1",
+      "load": 0.55,
+      "speed": 0.45,
+      "id": "R4-J1-red",
+      "kind": "reducer",
+      "name": "Редуктор J1",
+      "part": "RED-L",
+      "wear": 0.4
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R4",
+      "node": "J1",
+      "load": 0.55,
+      "speed": 0.45,
+      "id": "R4-J1-brk",
+      "kind": "brake",
+      "name": "Тормоз J1",
+      "part": "BRK",
+      "wear": 0.35000000000000003
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R4",
+      "node": "J2",
+      "load": 0.85,
+      "speed": 0.45,
+      "id": "R4-J2-mot",
+      "kind": "motor",
+      "name": "Серводвигатель J2",
+      "part": "MOT-L",
+      "wear": 0.482
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R4",
+      "node": "J2",
+      "load": 0.85,
+      "speed": 0.45,
+      "id": "R4-J2-red",
+      "kind": "reducer",
+      "name": "Редуктор J2",
+      "part": "RED-L",
+      "wear": 0.72
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R4",
+      "node": "J2",
+      "load": 0.85,
+      "speed": 0.45,
+      "id": "R4-J2-brk",
+      "kind": "brake",
+      "name": "Тормоз J2",
+      "part": "BRK",
+      "wear": 0.5900000000000001
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R4",
+      "node": "J3",
+      "load": 0.76,
+      "speed": 0.45,
+      "id": "R4-J3-mot",
+      "kind": "motor",
+      "name": "Серводвигатель J3",
+      "part": "MOT-L",
+      "wear": 0.446
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R4",
+      "node": "J3",
+      "load": 0.76,
+      "speed": 0.45,
+      "id": "R4-J3-red",
+      "kind": "reducer",
+      "name": "Редуктор J3",
+      "part": "RED-L",
+      "wear": 0.66
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R4",
+      "node": "J3",
+      "load": 0.76,
+      "speed": 0.45,
+      "id": "R4-J3-brk",
+      "kind": "brake",
+      "name": "Тормоз J3",
+      "part": "BRK",
+      "wear": 0.545
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R4",
+      "node": "J4",
+      "load": 0.45,
+      "speed": 0.45,
+      "id": "R4-J4-mot",
+      "kind": "motor",
+      "name": "Серводвигатель J4",
+      "part": "MOT-S",
+      "wear": 0.248
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R4",
+      "node": "J4",
+      "load": 0.45,
+      "speed": 0.45,
+      "id": "R4-J4-red",
+      "kind": "reducer",
+      "name": "Редуктор J4",
+      "part": "RED-S",
+      "wear": 0.33
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R4",
+      "node": "J4",
+      "load": 0.45,
+      "speed": 0.45,
+      "id": "R4-J4-brk",
+      "kind": "brake",
+      "name": "Тормоз J4",
+      "part": "BRK",
+      "wear": 0.2975
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R4",
+      "node": "J5",
+      "load": 0.52,
+      "speed": 0.45,
+      "id": "R4-J5-mot",
+      "kind": "motor",
+      "name": "Серводвигатель J5",
+      "part": "MOT-S",
+      "wear": 0.26
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R4",
+      "node": "J5",
+      "load": 0.52,
+      "speed": 0.45,
+      "id": "R4-J5-red",
+      "kind": "reducer",
+      "name": "Редуктор J5",
+      "part": "RED-S",
+      "wear": 0.35
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R4",
+      "node": "J5",
+      "load": 0.52,
+      "speed": 0.45,
+      "id": "R4-J5-brk",
+      "kind": "brake",
+      "name": "Тормоз J5",
+      "part": "BRK",
+      "wear": 0.31249999999999994
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R4",
+      "node": "J6",
+      "load": 0.4,
+      "speed": 0.45,
+      "id": "R4-J6-mot",
+      "kind": "motor",
+      "name": "Серводвигатель J6",
+      "part": "MOT-S",
+      "wear": 0.194
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R4",
+      "node": "J6",
+      "load": 0.4,
+      "speed": 0.45,
+      "id": "R4-J6-red",
+      "kind": "reducer",
+      "name": "Редуктор J6",
+      "part": "RED-S",
+      "wear": 0.24
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R4",
+      "node": "J6",
+      "load": 0.4,
+      "speed": 0.45,
+      "id": "R4-J6-brk",
+      "kind": "brake",
+      "name": "Тормоз J6",
+      "part": "BRK",
+      "wear": 0.22999999999999998
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R4",
+      "node": "cable",
+      "id": "R4-cablo",
+      "kind": "cable",
+      "name": "Кабельный пакет J1–J3",
+      "part": "CAB-LO",
+      "wear": 0.22,
+      "flex": 3,
+      "rated": 15000000
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R4",
+      "node": "cable",
+      "id": "R4-cabup",
+      "kind": "cable",
+      "name": "Кабельный пакет J4–J6",
+      "part": "CAB-UP",
+      "wear": 0.41,
+      "flex": 6,
+      "rated": 10000000,
+      "upper": true
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R4",
+      "node": "ctrl",
+      "id": "R4-bat",
+      "kind": "battery",
+      "name": "Батарея энкодеров",
+      "part": "ENC-BAT",
+      "wear": 0.6
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R4",
+      "node": "ctrl",
+      "id": "R4-fan",
+      "kind": "fan",
+      "name": "Вентилятор шкафа",
+      "part": "FAN",
+      "wear": 0.2
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "R4",
+      "node": "tool",
+      "kind": "tool",
+      "sub": "clamps",
+      "name": "Зажимы захвата модуля",
+      "part": "CLAMP-KIT",
+      "wear": 0.38,
+      "perCar": 2,
+      "rated": 3000000,
+      "id": "R4-clamps"
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "CV",
+      "node": "drive",
+      "kind": "cv",
+      "sub": "cvmot",
+      "name": "Двигатель привода 7,5 кВт",
+      "part": "CV-MOT",
+      "wear": 0.32,
+      "id": "CV-cvmot"
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "CV",
+      "node": "drive",
+      "kind": "cv",
+      "sub": "cvgbx",
+      "name": "Редуктор привода",
+      "part": "CV-GBX",
+      "wear": 0.58,
+      "id": "CV-cvgbx"
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "CV",
+      "node": "drive",
+      "kind": "cv",
+      "sub": "cvoil",
+      "name": "Масло редуктора",
+      "part": "GBX-OIL",
+      "wear": 0.91,
+      "btn": "Заменить масло",
+      "id": "CV-cvoil"
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "CV",
+      "node": "drive",
+      "kind": "cv",
+      "sub": "cvbrk",
+      "name": "Тормоз привода",
+      "part": "CV-BRK",
+      "wear": 0.44,
+      "id": "CV-cvbrk"
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "CV",
+      "node": "drive",
+      "kind": "cv",
+      "sub": "vfd",
+      "name": "Частотный преобразователь",
+      "part": "VFD",
+      "wear": 0.27,
+      "id": "CV-vfd"
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "CV",
+      "node": "drive",
+      "kind": "cv",
+      "sub": "sprk",
+      "name": "Звёздочки привода",
+      "part": "SPRK",
+      "wear": 0.48,
+      "id": "CV-sprk"
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "CV",
+      "node": "chain",
+      "kind": "cv",
+      "sub": "chain",
+      "name": "Тяговая цепь",
+      "part": "CHAIN",
+      "wear": 0.71,
+      "id": "CV-chain"
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "CV",
+      "node": "chain",
+      "kind": "cv",
+      "sub": "slats",
+      "name": "Пластины настила",
+      "part": "SLAT",
+      "wear": 0.35,
+      "id": "CV-slats"
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "CV",
+      "node": "chain",
+      "kind": "cv",
+      "sub": "rollers",
+      "name": "Опорные ролики, 48 шт.",
+      "part": "ROLL-KIT",
+      "wear": 0.62,
+      "id": "CV-rollers"
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "CV",
+      "node": "chain",
+      "kind": "cv",
+      "sub": "lube",
+      "name": "Лубрикатор цепи",
+      "part": "LUBE",
+      "wear": 0.68,
+      "btn": "Заправить",
+      "id": "CV-lube"
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "CV",
+      "node": "take",
+      "kind": "cv",
+      "sub": "take",
+      "name": "Натяжная станция",
+      "part": "TAKE-KIT",
+      "wear": 0.3,
+      "id": "CV-take"
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "CV",
+      "node": "track",
+      "kind": "cv",
+      "sub": "enc",
+      "name": "Энкодер слежения",
+      "part": "ENC-WHL",
+      "wear": 0.52,
+      "id": "CV-enc"
+    },
+    {
+      "fx": {},
+      "raw": {},
+      "val": {},
+      "hist": {},
+      "lv": {},
+      "level": "ok",
+      "n80": false,
+      "robot": "CV",
+      "node": "track",
+      "kind": "cv",
+      "sub": "pos",
+      "name": "Датчики позиции кузова, 4 шт.",
+      "part": "POS-ADJ",
+      "wear": 0.74,
+      "id": "CV-pos"
+    }
+  ],
+  "signals": {
+    "motor": [
+      {
+        "k": "temp",
+        "label": "Температура обмотки",
+        "unit": "°C",
+        "d": 1,
+        "warn": 95,
+        "alarm": 110,
+        "sd": 0.35,
+        "lag": 900
+      }
+    ],
+    "reducer": [
+      {
+        "k": "vib",
+        "label": "Вибрация",
+        "unit": "мм/с",
+        "d": 2,
+        "warn": 1.8,
+        "alarm": 4.5,
+        "sd": 0.05
+      },
+      {
+        "k": "res",
+        "label": "Невязка тока",
+        "unit": "%",
+        "d": 1,
+        "warn": 8,
+        "alarm": 15,
+        "sd": 0.35
+      }
+    ],
+    "cableUp": [
+      {
+        "k": "err",
+        "label": "Сбои связи энкодера",
+        "unit": "/ч",
+        "d": 1,
+        "warn": 2,
+        "alarm": 10,
+        "sd": 0.25,
+        "min": 0
+      }
+    ],
+    "battery": [
+      {
+        "k": "v",
+        "label": "Напряжение",
+        "unit": "В",
+        "d": 2,
+        "warn": 3.1,
+        "alarm": 2.95,
+        "lo": true,
+        "sd": 0.004
+      }
+    ],
+    "fan": [
+      {
+        "k": "ct",
+        "label": "Температура в шкафу",
+        "unit": "°C",
+        "d": 1,
+        "warn": 45,
+        "alarm": 50,
+        "sd": 0.15,
+        "lag": 1200
+      }
+    ],
+    "cups": [
+      {
+        "k": "vac",
+        "label": "Разрежение",
+        "unit": "кПа",
+        "d": 1,
+        "warn": -66,
+        "alarm": -58,
+        "sd": 0.35
+      }
+    ],
+    "spindles": [
+      {
+        "k": "spr",
+        "label": "Разброс момента",
+        "unit": "%",
+        "d": 1,
+        "warn": 3,
+        "alarm": 5,
+        "sd": 0.12,
+        "min": 0
+      }
+    ],
+    "calib": [
+      {
+        "k": "drift",
+        "label": "Дрейф датчика",
+        "unit": "%",
+        "d": 2,
+        "warn": 1,
+        "alarm": 2,
+        "sd": 0.015
+      }
+    ],
+    "cyl": [
+      {
+        "k": "stroke",
+        "label": "Время хода",
+        "unit": "мс",
+        "d": 0,
+        "warn": 520,
+        "alarm": 580,
+        "sd": 3
+      }
+    ],
+    "clamps": [
+      {
+        "k": "p",
+        "label": "Давление зажима",
+        "unit": "бар",
+        "d": 2,
+        "warn": 5.2,
+        "alarm": 4.8,
+        "lo": true,
+        "sd": 0.025
+      }
+    ],
+    "cvmot": [
+      {
+        "k": "cur",
+        "label": "Ток двигателя",
+        "unit": "А",
+        "d": 1,
+        "warn": 13.5,
+        "alarm": 15.5,
+        "sd": 0.08
+      },
+      {
+        "k": "temp",
+        "label": "Температура обмотки",
+        "unit": "°C",
+        "d": 1,
+        "warn": 95,
+        "alarm": 110,
+        "sd": 0.3,
+        "lag": 1200
+      }
+    ],
+    "cvgbx": [
+      {
+        "k": "vib",
+        "label": "Вибрация",
+        "unit": "мм/с",
+        "d": 2,
+        "warn": 1.8,
+        "alarm": 4.5,
+        "sd": 0.05
+      },
+      {
+        "k": "ot",
+        "label": "Температура масла",
+        "unit": "°C",
+        "d": 1,
+        "warn": 85,
+        "alarm": 95,
+        "sd": 0.25,
+        "lag": 1800
+      }
+    ],
+    "vfd": [
+      {
+        "k": "tr",
+        "label": "Температура радиатора",
+        "unit": "°C",
+        "d": 1,
+        "warn": 70,
+        "alarm": 80,
+        "sd": 0.2,
+        "lag": 600
+      }
+    ],
+    "chain": [
+      {
+        "k": "el",
+        "label": "Вытяжка цепи",
+        "unit": "%",
+        "d": 2,
+        "warn": 2.4,
+        "alarm": 3,
+        "sd": 0.01
+      }
+    ],
+    "lube": [
+      {
+        "k": "lvl",
+        "label": "Уровень смазки в баке",
+        "unit": "%",
+        "d": 0,
+        "warn": 25,
+        "alarm": 5,
+        "lo": true,
+        "sd": 0.2
+      },
+      {
+        "k": "flow",
+        "label": "Подача смазки",
+        "unit": "% нормы",
+        "d": 0,
+        "warn": 70,
+        "alarm": 40,
+        "lo": true,
+        "sd": 1.2
+      }
+    ],
+    "take": [
+      {
+        "k": "tr",
+        "label": "Ход натяжителя",
+        "unit": "%",
+        "d": 1,
+        "warn": 85,
+        "alarm": 95,
+        "sd": 0.15
+      },
+      {
+        "k": "tn",
+        "label": "Натяжение цепи",
+        "unit": "кН",
+        "d": 2,
+        "warn": 10.5,
+        "alarm": 9,
+        "lo": true,
+        "sd": 0.04
+      }
+    ],
+    "enc": [
+      {
+        "k": "slip",
+        "label": "Расхождение энкодера",
+        "unit": "мм/шаг",
+        "d": 2,
+        "warn": 2,
+        "alarm": 4,
+        "sd": 0.05,
+        "min": 0
+      }
+    ],
+    "pos": [
+      {
+        "k": "pe",
+        "label": "Ошибка позиции кузова",
+        "unit": "мм",
+        "d": 2,
+        "warn": 3,
+        "alarm": 5,
+        "sd": 0.08,
+        "min": 0
+      }
+    ]
+  },
+  "faults": [
+    {
+      "id": "f1",
+      "name": "Перегрев двигателя J2",
+      "where": "R1 · Остекление",
+      "hint": "забит фильтр охлаждения",
+      "t": [
+        "R1-J2-mot"
+      ],
+      "fx": {
+        "temp": 48,
+        "rate": 3
+      }
+    },
+    {
+      "id": "f2",
+      "name": "Утечка смазки редуктора J3",
+      "where": "R2 · Колёса",
+      "hint": "износ ускоряется в 60 раз",
+      "t": [
+        "R2-J3-red"
+      ],
+      "fx": {
+        "rate": 60,
+        "vib": 0.8,
+        "res": 3
+      },
+      "fix": "R2-J3-red"
+    },
+    {
+      "id": "f3",
+      "name": "Порез присоски",
+      "where": "R1 · Остекление",
+      "hint": "падает разрежение",
+      "t": [
+        "R1-cups"
+      ],
+      "fx": {
+        "vac": 16
+      },
+      "fix": "R1-cups"
+    },
+    {
+      "id": "f4",
+      "name": "Перетёрт кабель запястья",
+      "where": "R3 · Сиденья",
+      "hint": "сбои связи энкодера",
+      "t": [
+        "R3-cabup"
+      ],
+      "fx": {
+        "err": 6,
+        "rate": 40
+      },
+      "fix": "R3-cabup"
+    },
+    {
+      "id": "f5",
+      "name": "Разброс момента шпинделя",
+      "where": "R2 · Колёса",
+      "hint": "риск брака по затяжке",
+      "t": [
+        "R2-spindles"
+      ],
+      "fx": {
+        "spr": 3
+      },
+      "fix": "R2-spindles"
+    },
+    {
+      "id": "f6",
+      "name": "Перегруз оси J2 на 30%",
+      "where": "R4 · Тяжёлые узлы",
+      "hint": "тяжёлая версия модуля",
+      "t": [
+        "R4-J2-mot",
+        "R4-J2-red",
+        "R4-J2-brk"
+      ],
+      "fx": {
+        "load": 1.3
+      }
+    },
+    {
+      "id": "f7",
+      "name": "Отказ вентилятора шкафа",
+      "where": "R3 · Сиденья",
+      "hint": "растёт температура в шкафу",
+      "t": [
+        "R3-fan"
+      ],
+      "fx": {
+        "ct": 22,
+        "rate": 20
+      },
+      "fix": "R3-fan"
+    },
+    {
+      "id": "f8",
+      "name": "Засор лубрикатора цепи",
+      "where": "Конвейер",
+      "hint": "цепь изнашивается в 5 раз быстрее",
+      "t": [
+        "CV-lube"
+      ],
+      "fx": {
+        "clog": 50
+      },
+      "fix": "CV-lube"
+    },
+    {
+      "id": "f9",
+      "name": "Заклинивание опорных роликов",
+      "where": "Конвейер",
+      "hint": "растут ток и нагрев двигателя",
+      "t": [
+        "CV-rollers"
+      ],
+      "fx": {
+        "jam": 0.25,
+        "rate": 20
+      },
+      "fix": "CV-rollers"
+    },
+    {
+      "id": "f10",
+      "name": "Сбит датчик позиции",
+      "where": "Конвейер · ст. 2",
+      "hint": "робот не попадает в кузов",
+      "t": [
+        "CV-pos"
+      ],
+      "fx": {
+        "pe": 4.5
+      },
+      "fix": "CV-pos"
+    },
+    {
+      "id": "f11",
+      "name": "Течь масла редуктора привода",
+      "where": "Конвейер",
+      "hint": "растёт температура масла",
+      "t": [
+        "CV-cvgbx"
+      ],
+      "fx": {
+        "ot": 38,
+        "rate": 8
+      },
+      "fix": "CV-cvgbx"
+    }
+  ],
+  "parts": {
+    "RED-L": {
+      "name": "Редуктор оси J1–J3",
+      "stock": 1,
+      "min": 1,
+      "offers": [
+        [
+          "B",
+          2850000,
+          28
+        ],
+        [
+          "A",
+          3240000,
+          10
+        ]
+      ]
+    },
+    "RED-S": {
+      "name": "Редуктор оси J4–J6",
+      "stock": 2,
+      "min": 1,
+      "offers": [
+        [
+          "B",
+          1180000,
+          21
+        ],
+        [
+          "A",
+          1350000,
+          7
+        ]
+      ]
+    },
+    "MOT-L": {
+      "name": "Серводвигатель 4 кВт с энкодером",
+      "stock": 1,
+      "min": 1,
+      "offers": [
+        [
+          "A",
+          1960000,
+          14
+        ],
+        [
+          "B",
+          1820000,
+          30
+        ]
+      ]
+    },
+    "MOT-S": {
+      "name": "Серводвигатель 0,75 кВт с энкодером",
+      "stock": 2,
+      "min": 1,
+      "offers": [
+        [
+          "A",
+          690000,
+          10
+        ],
+        [
+          "B",
+          640000,
+          25
+        ]
+      ]
+    },
+    "BRK": {
+      "name": "Комплект тормоза оси",
+      "stock": 3,
+      "min": 2,
+      "offers": [
+        [
+          "A",
+          185000,
+          7
+        ],
+        [
+          "B",
+          162000,
+          18
+        ]
+      ]
+    },
+    "CAB-LO": {
+      "name": "Кабельный пакет J1–J3",
+      "stock": 1,
+      "min": 1,
+      "offers": [
+        [
+          "D",
+          940000,
+          12
+        ],
+        [
+          "A",
+          1080000,
+          5
+        ]
+      ]
+    },
+    "CAB-UP": {
+      "name": "Кабельный пакет J4–J6",
+      "stock": 1,
+      "min": 1,
+      "offers": [
+        [
+          "D",
+          610000,
+          10
+        ],
+        [
+          "A",
+          720000,
+          4
+        ]
+      ]
+    },
+    "ENC-BAT": {
+      "name": "Батарея энкодеров 3,6 В",
+      "stock": 2,
+      "min": 4,
+      "offers": [
+        [
+          "A",
+          38000,
+          3
+        ],
+        [
+          "F",
+          31000,
+          9
+        ]
+      ]
+    },
+    "FAN": {
+      "name": "Вентилятор шкафа управления",
+      "stock": 2,
+      "min": 2,
+      "offers": [
+        [
+          "A",
+          54000,
+          4
+        ],
+        [
+          "F",
+          47000,
+          8
+        ]
+      ]
+    },
+    "VAC-CUP": {
+      "name": "Присоска 150 мм, к-т 4 шт.",
+      "stock": 0,
+      "min": 2,
+      "offers": [
+        [
+          "C",
+          96000,
+          6
+        ],
+        [
+          "F",
+          88000,
+          14
+        ]
+      ]
+    },
+    "VAC-EJ": {
+      "name": "Вакуумный эжектор",
+      "stock": 1,
+      "min": 1,
+      "offers": [
+        [
+          "C",
+          214000,
+          8
+        ]
+      ]
+    },
+    "NUT-SPN": {
+      "name": "Шпиндели гайковёрта, к-т 5 шт.",
+      "stock": 1,
+      "min": 1,
+      "offers": [
+        [
+          "A",
+          2400000,
+          35
+        ],
+        [
+          "B",
+          2250000,
+          49
+        ]
+      ]
+    },
+    "TQ-CAL": {
+      "name": "Калибровка датчика момента",
+      "service": true,
+      "offers": [
+        [
+          "E",
+          145000,
+          3
+        ]
+      ]
+    },
+    "CYL-KIT": {
+      "name": "Ремкомплект пневмоцилиндров",
+      "stock": 3,
+      "min": 2,
+      "offers": [
+        [
+          "F",
+          67000,
+          5
+        ],
+        [
+          "A",
+          79000,
+          3
+        ]
+      ]
+    },
+    "CLAMP-KIT": {
+      "name": "Ремкомплект зажимов",
+      "stock": 2,
+      "min": 1,
+      "offers": [
+        [
+          "F",
+          112000,
+          7
+        ]
+      ]
+    },
+    "CV-MOT": {
+      "name": "Двигатель привода конвейера 7,5 кВт",
+      "stock": 1,
+      "min": 1,
+      "offers": [
+        [
+          "A",
+          1250000,
+          14
+        ],
+        [
+          "B",
+          1100000,
+          30
+        ]
+      ]
+    },
+    "CV-GBX": {
+      "name": "Редуктор привода конвейера",
+      "stock": 0,
+      "min": 1,
+      "offers": [
+        [
+          "B",
+          3900000,
+          45
+        ],
+        [
+          "A",
+          4300000,
+          20
+        ]
+      ]
+    },
+    "GBX-OIL": {
+      "name": "Масло редукторное, 20 л",
+      "stock": 2,
+      "min": 1,
+      "offers": [
+        [
+          "F",
+          42000,
+          3
+        ],
+        [
+          "A",
+          51000,
+          1
+        ]
+      ]
+    },
+    "CV-BRK": {
+      "name": "Тормоз привода конвейера",
+      "stock": 1,
+      "min": 1,
+      "offers": [
+        [
+          "A",
+          210000,
+          10
+        ]
+      ]
+    },
+    "VFD": {
+      "name": "Частотный преобразователь 7,5 кВт",
+      "stock": 0,
+      "min": 0,
+      "offers": [
+        [
+          "A",
+          890000,
+          7
+        ],
+        [
+          "B",
+          760000,
+          21
+        ]
+      ]
+    },
+    "CHAIN": {
+      "name": "Тяговая цепь, комплект на конвейер",
+      "stock": 0,
+      "min": 0,
+      "offers": [
+        [
+          "B",
+          6800000,
+          60
+        ],
+        [
+          "A",
+          7400000,
+          35
+        ]
+      ]
+    },
+    "SLAT": {
+      "name": "Пластины настила, к-т 10 шт.",
+      "stock": 2,
+      "min": 1,
+      "offers": [
+        [
+          "B",
+          520000,
+          30
+        ]
+      ]
+    },
+    "ROLL-KIT": {
+      "name": "Опорные ролики, к-т 48 шт.",
+      "stock": 1,
+      "min": 1,
+      "offers": [
+        [
+          "F",
+          380000,
+          12
+        ],
+        [
+          "A",
+          450000,
+          6
+        ]
+      ]
+    },
+    "SPRK": {
+      "name": "Звёздочки привода, пара",
+      "stock": 0,
+      "min": 0,
+      "offers": [
+        [
+          "B",
+          640000,
+          40
+        ]
+      ]
+    },
+    "LUBE": {
+      "name": "Смазка для цепей, канистра 20 л",
+      "stock": 3,
+      "min": 2,
+      "offers": [
+        [
+          "F",
+          36000,
+          4
+        ],
+        [
+          "A",
+          44000,
+          2
+        ]
+      ]
+    },
+    "TAKE-KIT": {
+      "name": "Ремкомплект натяжной станции",
+      "stock": 1,
+      "min": 0,
+      "offers": [
+        [
+          "B",
+          260000,
+          20
+        ]
+      ]
+    },
+    "ENC-WHL": {
+      "name": "Измерительное колесо энкодера",
+      "stock": 1,
+      "min": 1,
+      "offers": [
+        [
+          "A",
+          120000,
+          7
+        ]
+      ]
+    },
+    "POS-ADJ": {
+      "name": "Юстировка датчиков позиции",
+      "service": true,
+      "offers": [
+        [
+          "G",
+          0,
+          1
+        ]
+      ]
+    }
+  },
+  "causes": {
+    "motor": "перегрев двигателя: охлаждение, перегруз оси или износ редуктора",
+    "reducer": "износ или нехватка смазки редуктора",
+    "brake": "износ тормозных накладок",
+    "cable": "перетирание кабельного пакета",
+    "battery": "разряд батареи энкодеров, риск потери привязки осей",
+    "fan": "отказ вентилятора или забитый фильтр шкафа",
+    "cups": "износ или порез присоски, утечка в вакуумной линии",
+    "ejector": "загрязнение эжектора",
+    "spindles": "износ шпинделя, разброс момента затяжки",
+    "calib": "истёк интервал калибровки датчика момента",
+    "cyl": "износ уплотнений пневмоцилиндров",
+    "clamps": "утечка воздуха или износ зажимов",
+    "cvmot": "перегрузка привода: заклинивание роликов, вытянутая цепь или неисправность двигателя",
+    "cvgbx": "износ подшипников или нехватка масла в редукторе привода",
+    "cvoil": "просрочена замена масла редуктора",
+    "cvbrk": "износ тормоза привода",
+    "vfd": "перегрев частотного преобразователя",
+    "sprk": "износ зубьев звёздочек",
+    "chain": "вытяжка тяговой цепи из-за износа шарниров",
+    "slats": "износ пластин настила",
+    "rollers": "износ или заклинивание опорных роликов",
+    "lube": "нет подачи смазки на цепь",
+    "take": "натяжитель выбрал ход, цепь вытянулась",
+    "enc": "проскальзывание измерительного колеса энкодера",
+    "pos": "смещение или загрязнение датчика позиции кузова"
+  },
+  "actions": {
+    "motor": "Проверить фильтр и вентиляцию двигателя, нагрузку оси; при повторе заменить двигатель",
+    "reducer": "Проверить смазку, запланировать замену редуктора",
+    "brake": "Проверить момент удержания, заменить комплект тормоза",
+    "cable": "Осмотреть пакет в зоне запястья, заменить при повреждении",
+    "battery": "Заменить батарею при включённом контроллере",
+    "fan": "Заменить вентилятор и очистить фильтр шкафа",
+    "cups": "Заменить присоски, проверить вакуумную линию",
+    "ejector": "Очистить или заменить эжектор",
+    "spindles": "Проверить шпиндели, сделать контрольную затяжку",
+    "calib": "Вызвать метрологов и откалибровать датчик",
+    "cyl": "Заменить уплотнения пневмоцилиндров",
+    "clamps": "Проверить пневмолинию, заменить ремкомплект зажимов",
+    "cvmot": "Проверить ролики и натяжение цепи, ток по фазам; при перегреве заменить двигатель",
+    "cvgbx": "Проверить уровень и утечки масла, запланировать замену редуктора",
+    "cvoil": "Заменить масло редуктора",
+    "cvbrk": "Проверить зазор и накладки тормоза",
+    "vfd": "Очистить радиатор и проверить вентилятор преобразователя",
+    "sprk": "Заменить звёздочки вместе с цепью",
+    "chain": "Измерить шаг цепи, запланировать замену цепи вместе со звёздочками",
+    "slats": "Заменить изношенные пластины",
+    "rollers": "Найти и заменить заклинившие ролики",
+    "lube": "Долить смазку, прочистить форсунки лубрикатора",
+    "take": "Укоротить цепь на звено или заменить цепь",
+    "enc": "Проверить прижим и заменить измерительное колесо",
+    "pos": "Очистить и отъюстировать датчики позиции"
+  }
+}

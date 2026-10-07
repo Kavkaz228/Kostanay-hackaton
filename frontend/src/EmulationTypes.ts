@@ -1,0 +1,18 @@
+export type Point={t:number;value:number};
+export type Sensor={k:string;label:string;unit:string;d:number;warn:number;alarm:number;lo?:boolean;value:number|null;level:string;sampled_at:number|null;history:Point[]};
+export type Forecast={remaining_hours:number|null;working_days:number|null;from:string|null;to:string|null;basis:string;uncertainty_pct:number;after:string|null;open_ended:boolean};
+export type Component={id:string;robot:string;node:string;name:string;part:string;wear_pct:number;level:string;remaining_hours:number|null;cause:string;action:string;sensors:Sensor[];forecast:Forecast;load_pct:number|null;kind:string;rate_per_hour:number;speed_ratio:number|null};
+export type Offer={supplier_id:string;supplier:string;price_kzt:number;lead_workdays:number};
+export type Part={id:string;name:string;stock:number;service:boolean;minimum:number;needed_90d:number;in_transit:number;deficit:number;offers:Offer[];recommended_offer:(Offer&{reason:string})|null};
+export type Order={id:string;part:string;quantity:number;supplier_id:string;supplier:string;unit_price_kzt:number;total_kzt:number;lead_workdays:number;ordered_at:string;eta:string;status:'in_transit'|'received';received_at:string|null;reason:string};
+export type Notification={id:number;t:number;channel:string;level:string;text:string;status:string;external_delivery:false;read:boolean;read_at:string|null};
+export type State={source:string;t:number;model_time:string;paused:boolean;line:string;speed:number;revision:number;run_hours:number;down_hours:number;cars:number;rejected:number;stops:number;phase:number;
+  stations:{id:string;name:string;operation:string;joints:number[];level:string;payload:string;tool:string;shape:string;load:number[];speed:number;operational_status:string;body_number:number;phase:number;weakest_component_id:string}[];components:Component[];
+  alarms:{id:string;component_id:string;label:string;recovered:boolean;t:number;value?:number;unit?:string;trips:number;cause:string;action:string}[];
+  faults:{id:string;name:string;where:string;hint:string;active:boolean;t:string[]}[];
+  events:{id:number;t:number;level:string;text:string}[];parts:Part[];orders:Order[];notifications:Notification[];channels:Record<string,boolean>;
+  summary:{availability_pct:number;quality_pct:number;performance_pct:number;oee_pct:number;maintenance_30d:number;shortages:number;text:string};
+  conveyor:{load_pct:number;roller_resistance_pct:number;chain_resistance_pct:number;jam_pct:number;speed_m_min:number;distance_km:number;current_a:number|null;lubrication_pct:number;lubrication_flow_pct:number;stops:number;operational_status:string};shift:number;
+};
+export type Act=(action:string,extra?:Record<string,unknown>)=>Promise<boolean>;
+export const nodeNames:Record<string,string>={cable:'Кабели',tool:'Оснастка',ctrl:'Шкаф управления',drive:'Привод',chain:'Цепь и настил',take:'Натяжитель',track:'Позиционирование'};

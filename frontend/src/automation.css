@@ -1,0 +1,46 @@
+.automation-page .operation-cards { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; }
+.automation-page .operation-card { display: flex; flex-direction: column; gap: 20px; min-width: 0; min-height: 350px; padding: 28px; text-align: left; background: var(--panel); border: 1px solid var(--border); color: var(--text); border-radius: 12px; transition: border-color .15s, background .15s; }
+.automation-page .operation-card:hover { border-color: var(--primary); background: var(--panel-2); }
+.automation-page .operation-card-top { display: flex; justify-content: space-between; align-items: center; color: var(--primary); }
+.automation-page .operation-symbol { display: inline-grid; place-items: center; width: 62px; height: 62px; border-radius: 14px; background: var(--info-bg); border: 1px solid var(--info-border); }
+.automation-page .operation-card-title { font-size: 27px; line-height: 1.2; }
+.automation-page .operation-card-description { font-size: 13px; line-height: 1.7; color: var(--muted); min-height: 44px; }
+.automation-page .operation-card-status { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 12px; }
+.automation-page .operation-card-status small { color: var(--muted); font-size: 11px; margin-left: auto; }
+.automation-page .operation-state-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--warning); }
+.automation-page .operation-state-dot.running { background: var(--success); }
+.automation-page .operation-state-dot.stopped { background: var(--danger); }
+.automation-page .operation-card-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.automation-page .operation-card-metrics > span { display: grid; gap: 7px; min-width: 0; }
+.automation-page .operation-card-metrics b { font-size: 25px; font-weight: 600; }
+.automation-page .operation-card-metrics small { color: var(--muted); font-size: 11px; line-height: 1.6; }
+.automation-page .operation-card-footer { display: grid; gap: 14px; margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border); font-size: 11px; }
+.automation-page .operation-card-footer > span:first-child { color: var(--muted); }
+.automation-page .operation-card-footer > span:last-child { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: var(--primary); }
+.automation-page .operation-navigation, .automation-page .operation-state-line { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.automation-page .operation-navigation > h2 { margin-left: auto; font-size: 22px; }
+.automation-page .operation-state-line { margin-top: 22px; font-size: 12px; color: var(--muted); }
+.automation-page .operation-state-line > .button { margin-left: auto; }
+.automation-page .operation-statistics { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 20px; padding: 25px 0; }
+.automation-page .operation-statistics > div { display: grid; gap: 12px; align-content: start; }
+.automation-page .operation-statistics span { color: var(--muted); font-size: 12px; }
+.automation-page .operation-statistics strong { color: var(--text); font-size: 24px; }
+.automation-page .operation-statistics small { font-size: 12px; color: var(--muted); }
+.automation-page .operation-parameters { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px 24px; padding-top: 22px; margin: 0 0 20px; border-top: 1px solid var(--border); }
+.automation-page .operation-parameters dt { color: var(--muted); font-size: 12px; line-height: 1.6; }
+.automation-page .operation-parameters dd { margin: 7px 0 0; font-size: 15px; color: var(--text); }
+.automation-page .operation-predictions { display: grid; gap: 12px; margin-top: 24px; }
+.automation-page .operation-prediction { padding: 15px 18px; border-left: 3px solid var(--info); color: var(--text); background: var(--info-bg); font-size: 13px; line-height: 1.7; }
+.automation-page .operation-prediction.warning { border-color: var(--warning); background: var(--warning-bg); }
+.automation-page .operation-prediction.critical { border-color: var(--danger); background: var(--danger-bg); }
+.automation-page .operation-prediction p { margin-top: 7px; }
+.automation-page .operation-disclosure { margin-top: 0; }
+.automation-page .operation-disclosure > summary { color: var(--text); font-size: 14px; padding: 8px 0; cursor: pointer; }
+.automation-page .operation-disclosure[open] > summary { margin-bottom: 18px; }
+.automation-page .operation-robots { display: grid; gap: 24px; min-width: 0; }
+.automation-page .operation-scada-title { margin-bottom: 20px; }
+.automation-page .operation-scada-title .intro { margin-top: 10px; }
+.automation-page .operation-robot-consumables { grid-template-columns: repeat(auto-fit,minmax(min(100%,220px),1fr)); }
+@media(max-width:1100px) { .automation-page .operation-cards { gap: 14px; } .automation-page .operation-card { padding: 22px; } .automation-page .operation-statistics { grid-template-columns: repeat(3,minmax(0,1fr)); } }
+@media(max-width:820px) { .automation-page .operation-cards { grid-template-columns: 1fr; } .automation-page .operation-card { min-height: 0; } .automation-page .operation-card-description { min-height: 0; } }
+@media(max-width:650px) { .automation-page .operation-navigation > h2 { margin-left: 0; } .automation-page .operation-statistics { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px 14px; } .automation-page .operation-parameters { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px 14px; } .automation-page .operation-state-line > .button { margin-left: 0; } }

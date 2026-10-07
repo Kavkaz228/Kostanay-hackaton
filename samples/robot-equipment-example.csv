@@ -1,0 +1,6 @@
+timestamp,robot_id,operation,line_section,cycle_status,paint_volume_l,paint_capacity_l,electrode_count,welding_current_a,joint_temperature_c,motor_current_a,speed_percent,cycle_progress_pct,joint_1_deg,joint_2_deg,joint_3_deg,joint_4_deg,joint_5_deg,joint_6_deg,controller_mode,safety_state
+2026-10-06T08:00:00+05:00,EXAMPLE-WELD-01,welding,Сварка-1,In_Progress,,,120,180,42.5,8.2,30,25,10,-45,85,0,15,0,automatic,normal
+2026-10-06T08:00:00+05:00,EXAMPLE-PAINT-01,painting,Окраска-1,In_Progress,42,100,,,31.2,5.4,25,45,0,-60,100,0,20,0,automatic,normal
+2026-10-06T08:00:00+05:00,EXAMPLE-ASSEMBLY-01,assembly,Сборка-1,Idle,,,,,35.6,1.2,0,0,0,-35,75,0,0,0,automatic,normal
+2026-10-06T08:00:02+05:00,EXAMPLE-WELD-01,welding,Сварка-1,In_Progress,,,119,182,42.8,8.4,30,50,12,-40,80,0,18,0,automatic,normal
+2026-10-06T08:00:02+05:00,EXAMPLE-PAINT-01,painting,Окраска-1,In_Progress,41.8,100,,,31.4,5.5,25,60,2,-55,95,0,25,0,automatic,normal

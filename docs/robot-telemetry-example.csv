@@ -1,0 +1,6 @@
+timestamp,robot_id,line_section,joint_temperature_c,vibration_mm_s,hydraulic_pressure_bar,cycle_status,error_code
+2026-10-05T10:00:00Z,R-042,Welding_Shop,42.5,1.2,150.1,In_Progress,0
+2026-10-05T10:00:01Z,R-042,Welding_Shop,42.8,1.5,149.8,In_Progress,0
+2026-10-05T10:00:02Z,R-043,Assembly_Line,38.1,0.8,0.0,Idle,0
+2026-10-05T10:00:03Z,R-042,Welding_Shop,45.2,4.8,155.4,Warning,W-203
+2026-10-05T10:00:04Z,R-044,Painting_Shop,24.1,0.4,90.2,In_Progress,0

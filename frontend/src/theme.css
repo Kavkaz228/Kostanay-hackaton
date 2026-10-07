@@ -1,0 +1,147 @@
+/* Color roles are shared by every screen and SVG. Layout remains in the existing stylesheets. */
+:root, :root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0c1422;
+  --panel: #142033;
+  --panel-2: #1b2a41;
+  --surface-inset: #101b2c;
+  --surface-hover: #263951;
+  --surface-nav: #101b2c;
+  --text: #e8eef8;
+  --text-secondary: #c3cfdf;
+  --muted: #a1afc4;
+  --border: #35465e;
+  --border-strong: #607590;
+  --track: #30425b;
+  --primary: #6ca9ff;
+  --primary-hover: #91bfff;
+  --primary-bg: #1b3557;
+  --primary-border: #3869a4;
+  --on-primary: #071829;
+  --success: #60d99d;
+  --success-bg: #13392b;
+  --success-border: #287854;
+  --warning: #f2ca58;
+  --warning-bg: #3b3115;
+  --warning-border: #887027;
+  --danger: #ff8a92;
+  --danger-bg: #42222c;
+  --danger-border: #a84956;
+  --on-status: #0b1725;
+  --input-bg: #0e1929;
+  --disabled-bg: #1a273a;
+  --disabled-text: #8f9bb0;
+  --overlay: #040a15bf;
+  --shadow: #00000050;
+  --selection-bg: #315a92;
+  --selection-text: #ffffff;
+  --chart-grid: #344760;
+  --chart-label: #adbed4;
+  --chart-secondary: #a8bacf;
+  --equipment-surface: #142237;
+  --equipment-grid: #334b68;
+  --equipment-metal: #3d5979;
+  --equipment-metal-light: #9bb4d2;
+  --equipment-joint: #172b44;
+  --equipment-body: #abc2df;
+  --equipment-body-border: #d7e5f8;
+  --equipment-glass: #599abb;
+  --equipment-tire: #081422;
+  --equipment-stale: #b1bed1;
+  --equipment-working: #6ca9ff;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #eef3fa;
+  --panel: #ffffff;
+  --panel-2: #f2f6fc;
+  --surface-inset: #e8eff8;
+  --surface-hover: #dfe9f6;
+  --surface-nav: #f8faff;
+  --text: #152942;
+  --text-secondary: #354c69;
+  --muted: #526780;
+  --border: #c3d0e1;
+  --border-strong: #8198b6;
+  --track: #d5e1f0;
+  --primary: #195cba;
+  --primary-hover: #104b9d;
+  --primary-bg: #e4efff;
+  --primary-border: #82abe0;
+  --on-primary: #ffffff;
+  --success: #147046;
+  --success-bg: #e3f5e9;
+  --success-border: #75b98e;
+  --warning: #835900;
+  --warning-bg: #fff2c5;
+  --warning-border: #b89120;
+  --danger: #b12d3e;
+  --danger-bg: #ffebee;
+  --danger-border: #d08793;
+  --on-status: #ffffff;
+  --input-bg: #ffffff;
+  --disabled-bg: #e5ebf3;
+  --disabled-text: #586a82;
+  --overlay: #17283e88;
+  --shadow: #17365824;
+  --selection-bg: #c5ddff;
+  --selection-text: #123a73;
+  --chart-grid: #cdd9e9;
+  --chart-label: #526780;
+  --chart-secondary: #637893;
+  --equipment-surface: #e5edf8;
+  --equipment-grid: #c3d1e4;
+  --equipment-metal: #7899bf;
+  --equipment-metal-light: #385c88;
+  --equipment-joint: #e9f1fb;
+  --equipment-body: #9ebfe4;
+  --equipment-body-border: #466d99;
+  --equipment-glass: #20627f;
+  --equipment-tire: #283c53;
+  --equipment-stale: #65758b;
+  --equipment-working: #195cba;
+}
+
+:root {
+  --accent: var(--primary);
+  --info: var(--primary);
+  --info-bg: var(--primary-bg);
+  --info-border: var(--primary-border);
+  /* Compatibility aliases keep the existing Allur component API. */
+  --mint: var(--primary);
+  --green: var(--success);
+  --amber: var(--warning);
+  --red: var(--danger);
+  --chart-primary: var(--primary);
+  --equipment-ok: var(--success);
+  --equipment-warning: var(--warning);
+  --equipment-fault: var(--danger);
+  color: var(--text);
+  background: var(--bg);
+  accent-color: var(--primary);
+}
+
+body { color: var(--text); background: var(--bg); }
+::selection { color: var(--selection-text); background: var(--selection-bg); }
+button, input, select, textarea { accent-color: var(--primary); }
+textarea { color: var(--text); }
+input::placeholder, textarea::placeholder { color: var(--muted); opacity: 1; }
+input:disabled, select:disabled, textarea:disabled { color: var(--disabled-text); background: var(--disabled-bg); cursor: not-allowed; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
+.button { transition: background .15s, color .15s, border-color .15s; }
+.button:hover:not(:disabled) { border-color: var(--primary); }
+.button.primary:hover:not(:disabled), .button.light:hover:not(:disabled) { background: var(--primary-hover); border-color: var(--primary-hover); color: var(--on-primary); }
+.button.secondary:hover:not(:disabled), .button.tertiary:hover:not(:disabled) { background: var(--surface-hover); }
+.button.danger:hover:not(:disabled) { background: var(--danger-bg); border-color: var(--danger); }
+.button:disabled { opacity: 1; color: var(--disabled-text); background: var(--disabled-bg); border-color: var(--border); }
+.delta-card .mint, .saved-delta.mint { color: var(--success) !important; }
+.prediction-card.critical .prediction-top, .prediction-card.critical .prediction-station { color: var(--danger); }
+.prediction-card.info .prediction-top, .prediction-card.info .prediction-station { color: var(--primary); }
+.theme-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 30px; padding: 5px 8px; border: 1px solid var(--border); border-radius: 5px; background: var(--panel-2); color: var(--text-secondary); font-size: 10px; line-height: 1.3; white-space: nowrap; }
+.theme-toggle:hover { background: var(--surface-hover); border-color: var(--primary); color: var(--primary); }
+.theme-toggle:active { background: var(--primary-bg); }
+.theme-toggle:disabled { color: var(--disabled-text); background: var(--disabled-bg); }
+.access-theme { position: absolute; top: 24px; right: 24px; }
+@media (max-width: 660px) { .theme-toggle { padding: 5px 6px; } .theme-toggle span { display: none; } .access-theme { top: 16px; right: 16px; } }
+@media (prefers-reduced-motion: reduce) { .theme-toggle, .button { transition: none; } }

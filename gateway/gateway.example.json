@@ -1,0 +1,9 @@
+{
+  "api_url": "https://twin.customer.example",
+  "controller_url": "https://commissioned-controller-adapter.customer.example",
+  "robot_id": "ASSIGN_REAL_ROBOT_ID",
+  "max_speed_percent": 25,
+  "allow_resume": false,
+  "allow_plain_http": false,
+  "poll_seconds": 2
+}

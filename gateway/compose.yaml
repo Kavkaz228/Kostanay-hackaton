@@ -1,0 +1,25 @@
+name: allur-plant-gateway
+services:
+  gateway:
+    build: .
+    volumes:
+      - ./gateway.json:/config/gateway.json:ro
+      - gateway_state:/data
+    secrets: [gateway_key, controller_key]
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options: {max-size: "10m", max-file: "5"}
+    healthcheck:
+      test: [CMD, python, -c, "import time,pathlib; assert time.time()-float(pathlib.Path('/data/last-success').read_text())<30"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+secrets:
+  gateway_key: {file: ./.secrets/gateway_key}
+  controller_key: {file: ./.secrets/controller_key}
+volumes:
+  gateway_state:

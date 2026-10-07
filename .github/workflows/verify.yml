@@ -1,0 +1,26 @@
+name: Verify
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  docker-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Initialize isolated secrets
+        run: docker run --rm -e TEST_INSTALLATION=true -v "$PWD:/workspace" -w /workspace python:3.12-slim@sha256:02108f5d322dd89f1c9e552442c25acb0543dfdbc455693a5599624f20d9155d python ops/init.py
+      - name: Build and verify
+        run: |
+          docker compose -p allur-twin-check -f compose.yaml -f compose.test.yaml build tests e2e api web
+          docker compose -p allur-twin-check -f compose.yaml -f compose.test.yaml run --rm --no-deps tests
+          docker compose -p allur-twin-check -f compose.yaml -f compose.test.yaml up -d --wait web
+          docker compose -p allur-twin-check -f compose.yaml -f compose.test.yaml run --rm --no-deps e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: browser-results
+          path: e2e/results
+      - name: Stop isolated deployment
+        if: always()
+        run: docker compose -p allur-twin-check -f compose.yaml -f compose.test.yaml down -v

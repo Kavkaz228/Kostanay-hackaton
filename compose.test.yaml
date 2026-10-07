@@ -1,0 +1,21 @@
+services:
+  web:
+    ports: !override ["127.0.0.1:8092:8080"]
+  api:
+    environment:
+      COOKIE_SECURE: "false"
+      PUBLIC_ORIGIN: ""
+  backup:
+    volumes: !override
+      - ./docker/backup.sh:/backup.sh:ro
+      - ./.test-installation/backups:/backups
+  tests:
+    secrets: [database_password]
+    volumes:
+      - ./ops:/ops:ro
+      - ./.test-installation/results:/results
+secrets:
+  database_password:
+    file: ./.test-installation/.secrets/database_password
+  bootstrap_password:
+    file: ./.test-installation/.secrets/bootstrap_password

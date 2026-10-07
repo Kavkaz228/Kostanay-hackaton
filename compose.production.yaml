@@ -1,0 +1,27 @@
+# Requires a real domain resolving to the host, inbound ports 80/443 and PUBLIC_ORIGIN=https://<domain>.
+services:
+  api:
+    environment:
+      COOKIE_SECURE: "true"
+      PUBLIC_ORIGIN: https://${DOMAIN:?Set DOMAIN and PUBLIC_ORIGIN for this installation}
+  gateway:
+    image: caddy:2.10.2-alpine@sha256:4c6e91c6ed0e2fa03efd5b44747b625fec79bc9cd06ac5235a779726618e530d
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+    ports: ["80:80", "443:443"]
+    environment:
+      DOMAIN: ${DOMAIN:?Set DOMAIN}
+    volumes:
+      - ./docker/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      web:
+        condition: service_healthy
+    restart: unless-stopped
+volumes:
+  caddy_data:
+  caddy_config:

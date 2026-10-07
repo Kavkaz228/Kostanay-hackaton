@@ -1,0 +1,19 @@
+{
+  "elapsed_seconds": 34.92,
+  "status": {
+    "ready": true,
+    "model": "qwen3:4b",
+    "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+    "local_only": true,
+    "message": "Локальная модель готова"
+  },
+  "response": {
+    "model": "qwen3:4b",
+    "local_only": true,
+    "analysis": "Проверяю данные из maintenance_and_stock. В разделе 'shortages' есть 4 дефицита запчастей: QA Редуктор (2 шт.), QA Двигатель (1 шт.). Оператор должен проверить наличие запчастей и подтвердить дефициты. Для действий: нет команд, так как command_proposal_allowed = false. Оценка ресурса узлов расчётная, не подтверждена. Скорость робота не задана. Данные не полны для OEE. Нет выбранного робота (selected_robot = null).",
+    "action": "none",
+    "speed_percent": null,
+    "reason": "Нет выбранного робота и command_proposal_allowed = false. Дефициты запчастей подтверждены: 2 QA Редуктора и 1 QA Двигатель. Оператор должен проверить наличие запчастей и подтвердить дефициты.",
+    "proposal": null
+  }
+}

@@ -1,0 +1,36 @@
+import {test,expect} from '@playwright/test';
+
+test('local Ollama analyzes the explicitly selected virtual robot without proposing a plant command',async({page},info)=>{
+  test.skip(!process.env.TEST_LOCAL_AI,'Requires locally installed Ollama weights in the isolated installation.');
+  test.setTimeout(200000);
+  await page.goto('/');
+  await page.getByTestId('nav-ai').click();
+  await expect(page.getByText('Локальная модель готова',{exact:true})).toBeVisible();
+  await page.getByRole('combobox',{name:'Источник данных ИИ',exact:true}).selectOption('emulation');
+  await page.getByRole('combobox',{name:'Робот для анализа',exact:true}).selectOption('R2');
+  await expect(page.getByRole('checkbox',{name:'Разрешаю подготовить предложение команды выбранному роботу'})).toHaveCount(0);
+  await expect(page.getByText(/Учебный режим: показания рассчитаны эмулятором/)).toBeVisible();
+  await page.getByRole('textbox',{name:'Вопрос локальному ИИ',exact:true}).fill('Назови выбранный учебный робот и один конкретный узел из переданных показаний, который требует внимания. Кратко, без выполнения действий.');
+  const before=await (await page.request.get('/api/automation')).json();
+  const responsePromise=page.waitForResponse(r=>r.url().endsWith('/api/ai/analyze')&&r.request().method()==='POST',{timeout:170000});
+  await page.getByRole('button',{name:'Выполнить локальный анализ',exact:true}).click();
+  const response=await responsePromise;
+  expect(response.ok(),await response.text()).toBeTruthy();
+  const data=await response.json();
+  expect(data.data_source).toBe('emulation');
+  expect(data.proposal).toBeNull();
+  expect(data.action).toBe('none');
+  expect(data.maintenance_facts).toBeNull();
+  expect(data.emulation_facts.selected_robot).toBe('R2');
+  expect(data.emulation_facts.components.every((c:{robot:string})=>c.robot==='R2')).toBe(true);
+  expect(data.analysis.length).toBeGreaterThan(10);
+  const answer=page.getByRole('article',{name:'Ответ локального ИИ'});
+  await expect(answer).toBeVisible();
+  await expect(answer).toContainText('Команды оборудованию не создавались');
+  await expect(page.getByRole('region',{name:'Данные эмуляции для ИИ'})).toBeVisible();
+  expect((await (await page.request.get('/api/automation')).json()).commands).toEqual(before.commands);
+  await answer.screenshot({path:info.outputPath('emulation-local-ai.png')});
+  await page.getByRole('combobox',{name:'Источник данных ИИ',exact:true}).selectOption('plant');
+  await expect(page.getByRole('checkbox',{name:'Разрешаю подготовить предложение команды выбранному роботу'})).toBeVisible();
+  await expect(answer).toHaveCount(0);
+});

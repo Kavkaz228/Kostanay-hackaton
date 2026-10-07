@@ -1,0 +1,12 @@
+{
+  "name": "allur-twin-e2e",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:report": "playwright show-report --host 0.0.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.58.2"
+  }
+}

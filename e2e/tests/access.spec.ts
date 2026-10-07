@@ -1,0 +1,35 @@
+import {test, expect} from '@playwright/test';
+
+test('administrator creates a viewer, temporary password is rotated and revoked access stops the session', async ({page, browser}) => {
+  const username = 'viewer-' + Date.now();
+  const temporary = 'Temporary viewer phrase 2026!';
+  const permanent = 'Permanent viewer phrase 2026!';
+  await page.goto('/');
+  await page.getByRole('button', {name: 'Учётная запись', exact: true}).click();
+  await expect(page.getByRole('dialog', {name: 'Управление доступом'})).toBeVisible();
+  await page.getByLabel('Логин нового пользователя').fill(username);
+  await page.getByLabel('Временный пароль', {exact: true}).fill(temporary);
+  await page.getByRole('button', {name: 'Создать пользователя', exact: true}).click();
+  const row = page.locator('.access-user').filter({hasText: username});
+  await expect(row).toBeVisible();
+  const context = await browser.newContext({storageState: {cookies: [], origins: []}});
+  const viewer = await context.newPage();
+  await viewer.goto('/');
+  await viewer.getByLabel('Имя пользователя').fill(username);
+  await viewer.getByLabel('Пароль', {exact: true}).fill(temporary);
+  await viewer.getByRole('button', {name: 'Войти', exact: true}).click();
+  await expect(viewer.getByRole('heading', {name: 'Изменение пароля'})).toBeVisible();
+  await viewer.getByLabel('Текущий пароль').fill(temporary);
+  await viewer.getByLabel('Новый пароль', {exact: true}).fill(permanent);
+  await viewer.getByRole('button', {name: 'Сохранить новый пароль'}).click();
+  await expect(viewer.getByRole('heading', {name: 'Вход в систему'})).toBeVisible();
+  await viewer.getByLabel('Пароль', {exact: true}).fill(permanent);
+  await viewer.getByRole('button', {name: 'Войти', exact: true}).click();
+  await expect(viewer.getByTestId('nav-overview')).toBeVisible();
+  const denied = await viewer.request.post('/api/source', {data: {source: 'simulation'}});
+  expect(denied.status()).toBe(403);
+  await row.getByRole('button', {name: 'Заблокировать', exact: true}).click();
+  await expect(viewer.getByRole('heading', {name: 'Вход в систему'})).toBeVisible({timeout: 15000});
+  await page.screenshot({path: 'test-results/access-administration.png', fullPage: false});
+  await context.close();
+});

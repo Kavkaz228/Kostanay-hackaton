@@ -1,0 +1,41 @@
+/* The SCADA archive is rendered with Allur's existing panels, type and palette. */
+.emu-page section[id] { scroll-margin-top: 20px; }
+.emu-page .emu-nav { display: flex; flex-wrap: wrap; gap: 10px 20px; padding: 10px 0 20px; }
+.emu-page .emu-nav a { color: var(--primary); text-decoration: none; border-bottom: 1px solid var(--primary-border); padding-bottom: 4px; font-size: 13px; }
+.emu-page .emu-nav a:hover, .emu-page .emu-nav a:focus-visible { border-color: var(--primary); }
+.emu-page .emu-motion, .emu-page .emu-preferences label { display: inline-flex; align-items: center; gap: 8px; color: var(--text-secondary); font-size: 13px; }
+.emu-page .emu-motion input, .emu-page .emu-preferences input { width: 17px; height: 17px; accent-color: var(--primary); }
+.emu-page .emu-schematic { margin: 0; }
+.emu-page .emu-schematic svg { display: block; width: 100%; min-height: 240px; max-height: 430px; }
+.emu-page .emu-schematic figcaption { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 10px 0 20px; }
+.emu-page .emu-svg-hit { cursor: pointer; outline: none; }
+.emu-page .emu-svg-hit .emu-hit-ring { fill: transparent; stroke: transparent; stroke-width: 2; }
+.emu-page .emu-svg-hit:hover .emu-hit-ring, .emu-page .emu-svg-hit:focus-visible .emu-hit-ring, .emu-page .emu-svg-hit.selected .emu-hit-ring { stroke: currentColor; }
+.emu-page .emu-svg-hit:focus-visible .emu-hit-ring { stroke-width: 4; }
+.emu-page .emu-svg-hit .emu-hit-ring[fill="none"] { fill: none; stroke-width: 14; opacity: .18; }
+.emu-page .emu-svg-label { font-family: inherit; fill: var(--chart-label); font-size: 11px; }
+.emu-page .emu-svg-flag { pointer-events: none; }
+.emu-page .emu-issues, .emu-page .emu-prompts, .emu-page .emu-preferences { display: flex; flex-wrap: wrap; gap: 9px; margin: 16px 0; }
+.emu-page .emu-issues .button { white-space: normal; text-align: left; }
+.emu-page .emu-issues .scada-status { margin-right: 8px; }
+.emu-page .emu-subheading { margin-top: 28px; }
+.emu-page .emu-model-list { padding-left: 20px; color: var(--muted); font-size: 13px; line-height: 1.8; }
+.emu-page .emu-model-list li + li { margin-top: 8px; }
+.emu-page .robot-table meter { display: block; width: 100%; min-width: 65px; margin-top: 8px; accent-color: var(--primary); }
+.emu-page .emu-chat { display: grid; gap: 14px; max-height: 520px; overflow-y: auto; padding-right: 5px; }
+.emu-page .emu-message { padding: 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--panel); }
+.emu-page .emu-message > strong { color: var(--text-secondary); font-size: 13px; }
+.emu-page .emu-answer { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14px; line-height: 1.65; color: var(--text); }
+.emu-page .emu-chat-form { display: flex; gap: 14px; align-items: end; margin: 20px 0 14px; }
+.emu-page .emu-chat-form label { display: grid; gap: 8px; flex: 1; font-size: 13px; color: var(--muted); }
+.emu-page .emu-chat-form input { width: 100%; background: var(--input-bg); border: 1px solid var(--border); border-radius: 7px; color: var(--text); padding: 11px 14px; font: inherit; }
+.emu-page .emu-chat-form input:focus { outline: 2px solid var(--primary); outline-offset: 1px; }
+.emu-page .emu-notifications { max-height: 520px; overflow-y: auto; }
+.emu-page .emu-unread { border-left: 3px solid var(--primary); padding-left: 13px; }
+.emu-page .equipment-list small { display: block; font-size: 11px; line-height: 1.6; color: var(--muted); }
+.emu-page .equipment-list strong + span { line-height: 1.5; }
+.emu-page .equipment-item > meter { display: block; width: 100%; height: 8px; accent-color: var(--primary); }
+.emu-page .emu-feedback { position: fixed; z-index: 60; right: 22px; bottom: 22px; max-width: min(440px,calc(100vw - 44px)); display: flex; align-items: center; gap: 20px; padding: 14px 16px; border: 1px solid var(--success-border); background: var(--success-bg); border-radius: 10px; box-shadow: 0 10px 32px var(--shadow); color: var(--success); font-size: 13px; line-height: 1.5; }
+.emu-page .emu-feedback-error { border-color: var(--danger-border); background: var(--danger-bg); color: var(--danger); }
+.emu-page .emu-feedback > button { background: transparent; border: none; color: inherit; font: inherit; font-size: 22px; cursor: pointer; padding: 2px 7px; }
+@media (max-width: 700px) { .emu-page .emu-chat-form { flex-direction: column; align-items: stretch; } .emu-page .emu-schematic svg { min-height: 190px; } .emu-page .panel-heading { flex-wrap: wrap; gap: 12px; } }

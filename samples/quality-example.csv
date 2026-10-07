@@ -1,0 +1,4 @@
+timestamp,record_id,brand,model,color,quantity,rejected
+2026-10-06T08:00:00+05:00,EXAMPLE-QA-001,Chevrolet,Onix,Белый,10,1
+2026-10-06T08:10:00+05:00,EXAMPLE-QA-002,Chevrolet,Cobalt,Серебристый,8,0
+2026-10-06T08:20:00+05:00,EXAMPLE-QA-003,JAC,J7,Чёрный,3,0

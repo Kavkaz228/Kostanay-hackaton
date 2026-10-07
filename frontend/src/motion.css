@@ -1,0 +1,225 @@
+/*
+ * Motion layer for Allur twin.
+ * Principles: entrances play once when a screen or element appears; continuous motion is reserved for
+ * live signals (running model, running stations, alarms) so a paused line looks calm. Only transform,
+ * opacity, background-position and shadows are animated. Every rule is neutralised by the
+ * prefers-reduced-motion block at the end and by the global rule in style.css.
+ */
+@property --m-spot { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+
+:root {
+  --m-ease: cubic-bezier(.2, .8, .2, 1);
+  --m-spring: cubic-bezier(.34, 1.56, .64, 1);
+  --m-glow: color-mix(in srgb, var(--primary) 55%, transparent);
+}
+
+@keyframes m-rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes m-rise-lg { from { opacity: 0; transform: translateY(22px) scale(.985); } to { opacity: 1; transform: none; } }
+@keyframes m-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes m-pop { 0% { opacity: 0; transform: scale(.6); } 100% { opacity: 1; transform: none; } }
+@keyframes m-dialog { from { opacity: 0; transform: translateY(10px) scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes m-drawer { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: none; } }
+@keyframes m-toast { from { opacity: 0; transform: translateY(18px) scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes m-timer { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+@keyframes m-ping { 0% { transform: scale(1); opacity: .6; } 75%, 100% { transform: scale(3.4); opacity: 0; } }
+@keyframes m-blink { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+@keyframes m-breathe { 0%, 100% { opacity: 1; } 50% { opacity: .55; } }
+@keyframes m-scan { from { background-position: -70% 0; } to { background-position: 170% 0; } }
+@keyframes m-rail { to { background-position: 24px 0, 0 0; } }
+@keyframes m-chevron { 0%, 100% { opacity: .3; transform: translateX(-2px); } 50% { opacity: 1; transform: translateX(3px); } }
+@keyframes m-alarm { 0%, 100% { box-shadow: 0 0 0 0 transparent; } 50% { box-shadow: 0 0 0 4px color-mix(in srgb, var(--danger) 22%, transparent), 0 10px 28px -14px var(--danger); } }
+@keyframes m-ring { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, currentColor 45%, transparent); } 100% { box-shadow: 0 0 0 10px transparent; } }
+@keyframes m-draw { to { stroke-dashoffset: 0; } }
+@keyframes m-bar-in { from { transform: scaleY(0); } to { transform: none; } }
+@keyframes m-eq { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.45); } }
+@keyframes m-icon-in { from { opacity: 0; transform: rotate(-120deg) scale(.4); } to { opacity: 1; transform: none; } }
+@keyframes m-nav-pop { 0% { transform: scale(1); } 40% { transform: scale(1.22) rotate(-6deg); } 100% { transform: none; } }
+@keyframes m-shake { 0%, 100% { transform: none; } 20% { transform: translateX(-6px); } 40% { transform: translateX(5px); } 60% { transform: translateX(-3px); } 80% { transform: translateX(2px); } }
+@keyframes m-grid { to { background-position: 48px 48px, 48px 48px; } }
+@keyframes m-float { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(110px, 70px, 0) scale(1.18); } }
+@keyframes m-scanline { 0% { transform: translateY(8vh); opacity: 0; } 12%, 88% { opacity: .55; } 100% { transform: translateY(92vh); opacity: 0; } }
+@keyframes m-sweep { from { transform: scaleX(0); opacity: 1; } 60% { opacity: 1; } to { transform: scaleX(1); opacity: .5; } }
+
+/* ---------- Stagger index shared by grids and lists ---------- */
+:is(.metrics-grid, .stations-grid, .operation-cards, .predictions-list, .incident-list, .recent-list, .overview-main, .overview-aside, .data-main, .data-aside, .scenario-results) > :nth-child(2) { --m-i: 1; }
+:is(.metrics-grid, .stations-grid, .operation-cards, .predictions-list, .incident-list, .recent-list, .overview-main, .overview-aside, .data-main, .data-aside, .scenario-results) > :nth-child(3) { --m-i: 2; }
+:is(.metrics-grid, .stations-grid, .operation-cards, .predictions-list, .incident-list, .recent-list, .overview-main, .overview-aside, .data-main, .data-aside, .scenario-results) > :nth-child(4) { --m-i: 3; }
+:is(.metrics-grid, .stations-grid, .operation-cards, .predictions-list, .incident-list, .recent-list, .overview-main, .overview-aside, .data-main, .data-aside, .scenario-results) > :nth-child(5) { --m-i: 4; }
+:is(.metrics-grid, .stations-grid, .operation-cards, .predictions-list, .incident-list, .recent-list, .overview-main, .overview-aside, .data-main, .data-aside, .scenario-results) > :nth-child(6) { --m-i: 5; }
+:is(.metrics-grid, .stations-grid, .operation-cards, .predictions-list, .incident-list, .recent-list, .overview-main, .overview-aside, .data-main, .data-aside, .scenario-results) > :nth-child(n+7) { --m-i: 6; }
+
+/* ---------- Screen entrances (play once when an element mounts) ---------- */
+.page-heading-copy { animation: m-rise .55s var(--m-ease) backwards; }
+.heading-actions { animation: m-fade .6s ease-out .1s backwards; }
+.shift-toolbar { animation: m-rise .5s var(--m-ease) .05s backwards; }
+.connection-banner { animation: m-rise .4s var(--m-ease) backwards; }
+main .panel { animation: m-rise .6s var(--m-ease) backwards; animation-delay: calc(.12s + var(--m-i, 0) * .07s); }
+.metrics-grid > * { animation: m-rise .55s var(--m-ease) backwards; animation-delay: calc(.06s + var(--m-i, 0) * .06s); }
+.overview-lower .panel { animation-delay: calc(.24s + var(--m-i, 0) * .08s); }
+.station-card { animation: m-rise .55s var(--m-ease) backwards; animation-delay: calc(.2s + var(--m-i, 0) * .07s); }
+.automation-page .operation-card { animation: m-rise-lg .65s var(--m-ease) backwards; animation-delay: calc(.08s + var(--m-i, 0) * .09s); }
+.prediction-card, .recent-row, .incident-card { animation: m-rise .45s var(--m-ease) backwards; animation-delay: calc(.1s + var(--m-i, 0) * .05s); }
+.empty-state, .no-risks, .empty-inline { animation: m-fade .5s ease-out .15s backwards; }
+.empty-state .empty-icon, .no-risks > span { animation: m-pop .55s var(--m-spring) .25s backwards; }
+
+/* ---------- Sidebar ---------- */
+.brand-symbol i { transform-origin: 50% 100%; animation: m-bar-in .8s var(--m-spring) backwards; }
+.brand-symbol i:nth-child(2) { animation-delay: .09s; }
+.brand-symbol i:nth-child(3) { animation-delay: .18s; }
+.brand:hover .brand-symbol i { animation: m-eq .9s ease-in-out infinite; }
+.brand:hover .brand-symbol i:nth-child(2) { animation-delay: -.3s; }
+.brand:hover .brand-symbol i:nth-child(3) { animation-delay: -.6s; }
+
+.sidebar nav { position: relative; }
+.sidebar nav.has-indicator .nav-item { position: relative; z-index: 1; }
+.sidebar nav.has-indicator .nav-item.active { background: transparent; box-shadow: none; }
+.nav-indicator { position: absolute; top: 0; left: 0; right: 0; z-index: 0; border-radius: 6px; pointer-events: none; background: var(--primary-bg); box-shadow: inset 0 0 0 1px var(--primary-border), 0 10px 26px -18px var(--primary); transition: transform .5s var(--m-ease), height .5s var(--m-ease); }
+.nav-indicator::before { content: ''; position: absolute; left: 0; top: 50%; width: 3px; height: 18px; margin-top: -9px; border-radius: 0 3px 3px 0; background: var(--primary); box-shadow: 0 0 12px var(--m-glow); }
+.nav-item > svg { transition: transform .3s var(--m-ease); }
+.nav-item:hover > svg { transform: translateX(2px) scale(1.08); }
+.nav-item.active > svg { animation: m-nav-pop .5s var(--m-spring); }
+.nav-count { animation: m-pop .45s var(--m-spring); }
+.mobile-scrim { animation: m-fade .2s ease-out; }
+.sidebar { transition: transform .32s var(--m-ease); }
+
+/* ---------- Live status lights ---------- */
+.status-light, .site-dot, .status-pill i, .automation-page .operation-state-dot { position: relative; }
+.status-light::after, .site-dot::after, .status-pill i::after, .automation-page .operation-state-dot::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: inherit; opacity: 0; pointer-events: none; }
+.status-light:not(.paused):not(.offline)::after, .site-dot::after { animation: m-ping 2.4s cubic-bezier(0, 0, .2, 1) infinite; }
+.status-light.offline, .status-pill.stopped i, .automation-page .operation-state-dot.stopped { animation: m-blink 1.2s ease-in-out infinite; }
+[data-live] .status-pill.running i::after, [data-live] .automation-page .operation-state-dot.running::after { animation: m-ping 2.4s cubic-bezier(0, 0, .2, 1) infinite; animation-delay: calc(var(--m-i, 0) * .3s); }
+.status-pill.blocked i, .status-pill.starved i { animation: m-breathe 2s ease-in-out infinite; }
+.incident-symbol.critical { animation: m-ring 2s ease-out infinite; }
+
+/* ---------- Production flow on the overview ---------- */
+.map-rail { transition: opacity .4s; }
+[data-live] .map-rail { top: 132px; height: 2px; border-top: 0; opacity: .7; background: repeating-linear-gradient(90deg, var(--primary) 0 6px, transparent 6px 24px), linear-gradient(90deg, transparent, color-mix(in srgb, var(--primary) 22%, transparent) 8%, color-mix(in srgb, var(--primary) 22%, transparent) 92%, transparent); animation: m-rail .9s linear infinite; }
+[data-live] .station-card:after { color: var(--primary); animation: m-chevron 1.6s ease-in-out infinite; animation-delay: calc(var(--m-i, 0) * .22s); }
+.station-card::before { content: ''; position: absolute; top: -1px; left: 12px; right: 12px; height: 2px; border-radius: 0 0 2px 2px; pointer-events: none; opacity: 0; transition: opacity .4s; }
+[data-live] .station-card.running::before { opacity: 1; background: linear-gradient(90deg, transparent, var(--primary), transparent) no-repeat; background-size: 40% 100%; animation: m-scan 2.6s linear infinite; animation-delay: calc(var(--m-i, 0) * .35s); }
+.station-card.stopped::before { opacity: 1; background: var(--danger); }
+.station-card.blocked::before, .station-card.starved::before { opacity: 1; background: var(--warning); animation: m-breathe 2.2s ease-in-out infinite; }
+.station-card.stopped { animation: m-rise .55s var(--m-ease) backwards, m-alarm 2.2s ease-in-out infinite; animation-delay: calc(.2s + var(--m-i, 0) * .07s), .8s; }
+.station-card .station-icon svg { transition: transform .35s var(--m-spring); }
+.station-card:hover .station-icon svg { transform: scale(1.12) rotate(-4deg); }
+.station-bottom .icon-arrowUp { transition: transform .3s var(--m-ease); }
+.station-card:hover .station-bottom .icon-arrowUp { transform: translate(2px, -2px); }
+.buffer-bar i { transition: width .6s var(--m-ease), background-color .3s; }
+.buffer-bar.full i { animation: m-breathe 1.6s ease-in-out infinite; }
+
+/* ---------- Cards: pointer spotlight and hover depth ---------- */
+.metric-card, .station-card, .operation-card, .source-option {
+  --m-spotlight: radial-gradient(260px circle at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--primary) var(--m-spot), transparent), transparent 72%);
+  background-image: var(--m-spotlight);
+}
+.metric-card.accent, .station-card.stopped, .station-card.blocked, .station-card.starved, .source-option.selected, .automation-page .operation-card:hover { background-image: var(--m-spotlight); }
+.metric-card { transition: border-color .25s, box-shadow .3s, --m-spot .4s; }
+.metric-card:hover { --m-spot: 11%; border-color: var(--border-strong); box-shadow: 0 16px 34px -26px var(--shadow); }
+.metric-card.accent:hover { border-color: var(--primary); }
+.metric-label svg { transition: transform .4s var(--m-spring), color .25s; }
+.metric-card:hover .metric-label svg { transform: scale(1.15); color: var(--primary); }
+.station-card { transition: transform .3s var(--m-ease), border-color .25s, box-shadow .3s, --m-spot .4s; }
+.station-card:hover { --m-spot: 13%; box-shadow: 0 18px 34px -22px var(--m-glow); }
+.automation-page .operation-card { transition: transform .35s var(--m-ease), border-color .2s, background-color .2s, box-shadow .35s, --m-spot .4s; }
+.automation-page .operation-card:hover { --m-spot: 12%; transform: translateY(-4px); box-shadow: 0 26px 46px -30px var(--m-glow); }
+.automation-page .operation-symbol { transition: transform .45s var(--m-spring), box-shadow .35s; }
+.automation-page .operation-card:hover .operation-symbol { transform: translateY(-3px) rotate(-5deg); box-shadow: 0 12px 26px -12px var(--m-glow); }
+.automation-page .operation-card-top > svg, .automation-page .operation-card-footer svg { transition: transform .35s var(--m-ease); }
+.automation-page .operation-card:hover .operation-card-top > svg { transform: translate(3px, -3px); }
+.automation-page .operation-card:hover .operation-card-footer svg { transform: translateX(4px); }
+.source-option { transition: border-color .2s, transform .3s var(--m-ease), box-shadow .3s, --m-spot .4s; }
+.source-option:hover:not(:disabled) { --m-spot: 12%; transform: translateY(-2px); box-shadow: 0 16px 32px -24px var(--m-glow); }
+
+/* ---------- Buttons and small affordances ---------- */
+.button { transition: background-color .15s, color .15s, border-color .15s, transform .18s var(--m-ease), box-shadow .25s; }
+.button:active:not(:disabled) { transform: translateY(1px) scale(.985); }
+.button.primary:hover:not(:disabled), .button.light:hover:not(:disabled) { box-shadow: 0 10px 24px -14px var(--primary); }
+.button .icon-arrow, .text-button .icon-arrow, .prediction-station .icon-arrow { transition: transform .3s var(--m-ease); }
+.button:hover:not(:disabled) .icon-arrow, .text-button:hover .icon-arrow, .prediction-station:hover .icon-arrow { transform: translateX(3px); }
+.button .icon-refresh { transition: transform .6s var(--m-ease); }
+.button:hover:not(:disabled) .icon-refresh { transform: rotate(180deg); }
+.icon-button svg { transition: transform .25s var(--m-ease); }
+.icon-button:hover svg { transform: scale(1.1); }
+.tab-filters button { transition: color .2s, border-color .25s; }
+.saved-scenario { transition: background-color .2s; }
+
+/* ---------- Charts ---------- */
+.chart-line:not(.dashed) { stroke-dasharray: 1; stroke-dashoffset: 1; animation: m-draw 1.3s cubic-bezier(.45, 0, .2, 1) .15s forwards; }
+.chart-line.dashed { animation: m-fade .8s ease-out .4s backwards; }
+.chart-area { animation: m-fade 1s ease-out .55s backwards; }
+.chart-grid-line { animation: m-sweep .7s var(--m-ease) backwards; transform-box: fill-box; transform-origin: 0 50%; }
+.chart-head { animation: m-pop .4s var(--m-spring) 1.2s backwards; transform-box: fill-box; transform-origin: center; }
+.chart-head-ring { transform-box: fill-box; transform-origin: center; animation: m-ping 2s cubic-bezier(0, 0, .2, 1) 1.4s infinite; opacity: 0; }
+
+/* ---------- Progress ---------- */
+.progress-track i { position: relative; overflow: hidden; transition: width .7s var(--m-ease); }
+[data-live] .progress-track i::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgb(255 255 255 / .38), transparent) no-repeat; background-size: 45% 100%; animation: m-scan 2.4s linear infinite; }
+
+/* ---------- Overlays ---------- */
+.modal-backdrop { animation: m-fade .25s ease-out; }
+.station-drawer { animation: m-drawer .45s var(--m-ease); }
+.station-drawer .drawer-stats > div { animation: m-rise .45s var(--m-ease) backwards; }
+.station-drawer .drawer-stats > div:nth-child(2) { animation-delay: .06s; }
+.station-drawer .drawer-stats > div:nth-child(3) { animation-delay: .12s; }
+.confirm-dialog[open] { animation: m-dialog .32s var(--m-ease); }
+.confirm-dialog[open]::backdrop { animation: m-fade .25s ease-out; }
+.confirm-dialog[open] .confirm-icon { animation: m-pop .5s var(--m-spring) .1s backwards; }
+.access-overlay { animation: m-fade .25s ease-out; }
+.access-panel { animation: m-rise-lg .45s var(--m-ease); }
+.toast { overflow: hidden; animation: m-toast .5s var(--m-spring); }
+.toast-timer { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: currentColor; opacity: .5; transform-origin: 0 50%; animation-name: m-timer; animation-timing-function: linear; animation-fill-mode: forwards; pointer-events: none; }
+.toast > svg:first-child { animation: m-pop .5s var(--m-spring) .1s backwards; }
+.inline-error, .inline-success { animation: m-rise .35s var(--m-ease); }
+details[open] > :not(summary) { animation: m-fade .35s ease-out; }
+
+/* ---------- Theme switch: circular reveal (see Theme.tsx) ---------- */
+.theme-toggle svg { animation: m-icon-in .55s var(--m-spring); }
+.theme-toggle { transition: background-color .15s, color .15s, border-color .15s, transform .18s var(--m-ease); }
+.theme-toggle:active { transform: scale(.94); }
+::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+:root[data-theme-switching] *, :root[data-theme-switching] *::before, :root[data-theme-switching] *::after { transition: none !important; }
+
+/* ---------- Loading ---------- */
+.loading-bars { display: flex; align-items: flex-end; gap: 5px; height: 36px; transform: skewX(-18deg); }
+.loading-bars i { width: 7px; height: 100%; border-radius: 1px; background: var(--primary); transform-origin: 50% 100%; animation: m-eq 1s ease-in-out infinite; box-shadow: 0 0 16px var(--m-glow); }
+.loading-bars i:nth-child(2) { animation-delay: -.33s; }
+.loading-bars i:nth-child(3) { animation-delay: -.66s; }
+
+/* ---------- Login screen ---------- */
+.access-screen { position: relative; overflow: hidden; isolation: isolate; }
+.access-backdrop { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.access-lines { position: absolute; inset: 0; opacity: .55; background-image: linear-gradient(color-mix(in srgb, var(--border) 55%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--border) 55%, transparent) 1px, transparent 1px); background-size: 48px 48px; -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, #000 15%, transparent 75%); mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, #000 15%, transparent 75%); animation: m-grid 30s linear infinite; }
+.access-glow { position: absolute; width: 540px; height: 540px; border-radius: 50%; background: var(--primary); opacity: .22; filter: blur(90px); animation: m-float 18s ease-in-out infinite alternate; }
+.access-glow.one { top: -220px; left: -160px; }
+.access-glow.two { right: -200px; bottom: -260px; background: color-mix(in srgb, var(--primary) 55%, var(--success)); animation-duration: 23s; animation-direction: alternate-reverse; }
+.access-scan { position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--primary) 50%, transparent); box-shadow: 0 0 18px var(--primary); animation: m-scanline 8s ease-in-out infinite; }
+:root[data-theme="light"] .access-glow { opacity: .16; }
+.access-screen .access-card { position: relative; animation: m-rise-lg .7s var(--m-ease) backwards; box-shadow: 0 30px 80px -40px var(--shadow); }
+.access-screen .access-card::before { content: ''; position: absolute; top: -1px; left: 24px; right: 24px; height: 1px; background: linear-gradient(90deg, transparent, var(--primary), transparent); transform-origin: 50% 50%; animation: m-sweep 1.1s var(--m-ease) .35s backwards; }
+.access-screen .access-card > * { animation: m-rise .5s var(--m-ease) backwards; }
+.access-screen .access-card > :nth-child(1) { animation-delay: .18s; }
+.access-screen .access-card > :nth-child(2) { animation-delay: .24s; }
+.access-screen .access-card > :nth-child(3) { animation-delay: .3s; }
+.access-screen .access-card > :nth-child(4) { animation-delay: .36s; }
+.access-screen .access-card > :nth-child(5) { animation-delay: .42s; }
+.access-screen .access-card > :nth-child(n+6) { animation-delay: .48s; }
+.access-screen .access-card .form-error { animation: m-shake .45s ease-in-out; }
+.access-brand { display: flex; align-items: center; gap: 10px; font-size: 24px; font-weight: 650; letter-spacing: -1.2px; line-height: 1; color: var(--text); }
+.access-brand .brand-twin { font-size: 17px; }
+.access-brand .brand-symbol { width: 21px; height: 27px; gap: 3px; }
+.access-brand .brand-symbol i { width: 5px; height: 16px; }
+.access-brand .brand-symbol i:nth-child(2) { height: 25px; }
+.access-brand .brand-symbol i:nth-child(3) { height: 20px; }
+.access-theme { animation: m-fade .6s ease-out .4s backwards; z-index: 1; }
+
+/* ---------- Automation and emulation details ---------- */
+.automation-page .operation-prediction { animation: m-rise .45s var(--m-ease) backwards; }
+.emu-svg-flag circle { transform-box: fill-box; transform-origin: center; animation: m-breathe 1.4s ease-in-out infinite; }
+
+/* ---------- Reduced motion: keep the final states, drop the movement ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .chart-line:not(.dashed) { stroke-dashoffset: 0; }
+  .toast-timer, .access-scan { display: none; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}

@@ -1,0 +1,85 @@
+import {test,expect} from '@playwright/test';
+import {readFileSync} from 'node:fs';
+
+test('case report and vehicle quality keep plans separate from inspected cars',async({page,request},testInfo)=>{
+  const headers={'X-CSRF-Token':readFileSync('/tmp/allur-csrf','utf8')};
+  const result=await request.post('/api/import',{headers,multipart:{file:{name:'case-test-data.docx',mimeType:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',buffer:readFileSync('/samples/case-test-data.docx')}}});
+  expect(result.ok()).toBeTruthy();
+  await page.goto('/');await page.getByTestId('nav-quality').click();
+  await expect(page.getByRole('heading',{name:'Качество по участкам'})).toBeVisible();
+  await expect(page.getByText(/Расхождение: 700/)).toBeVisible();
+  const brand='QA-CAR-'+Date.now();
+  await page.getByLabel('Марка авто',{exact:true}).fill(brand);
+  await page.getByLabel('Модель авто',{exact:true}).fill('Sedan One');
+  await page.getByLabel('Цвет авто',{exact:true}).fill('Белый');
+  await page.getByLabel('Количество автомобилей',{exact:true}).fill('12');
+  await page.getByLabel('Количество брака',{exact:true}).fill('2');
+  await page.getByRole('button',{name:'Сохранить проверку',exact:true}).click();
+  await expect(page.getByRole('status')).toContainText('Сохранено 1');
+  await page.getByRole('searchbox',{name:'Поиск по марке, модели или цвету'}).fill(brand);
+  const row=page.locator('tr').filter({hasText:brand}).first();
+  await expect(row).toContainText('Sedan One');await expect(row).toContainText('Белый');
+  await expect(row.getByRole('cell').nth(3)).toHaveText('12');await expect(row.getByRole('cell').nth(4)).toHaveText('10');
+  await page.evaluate(()=>window.scrollTo(0,0));
+  await page.screenshot({path:testInfo.outputPath('quality-desktop.png'),fullPage:true,animations:'disabled'});
+  await page.reload();await page.getByTestId('nav-quality').click();
+  await page.getByRole('searchbox',{name:'Поиск по марке, модели или цвету'}).fill(brand);
+  await expect(page.locator('tr').filter({hasText:brand}).first()).toContainText('Sedan One');
+  await page.setViewportSize({width:390,height:844});
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(392);
+  await page.screenshot({path:testInfo.outputPath('quality-mobile.png'),fullPage:true,animations:'disabled'});
+});
+
+test('robot arm and consumables follow real API readings; proposals do not move hardware',async({page,request},testInfo)=>{
+  const id='QA-ARM-'+Date.now(),start=Date.now();
+  const headers={'X-CSRF-Token':readFileSync('/tmp/allur-csrf','utf8')};
+  const measured={robot_id:id,timestamp:new Date(start).toISOString(),line_section:'Окраска-1',operation:'painting',cycle_status:'In_Progress',paint_volume_l:42.5,paint_capacity_l:100,electrode_count:12,motor_current_a:5.4,joint_temperature_c:31.4,cycle_progress_pct:25,speed_percent:25,joint_2_deg:-45,joint_3_deg:85,controller_mode:'automatic',safety_state:'normal'};
+  expect((await request.post('/api/robots/measurements',{headers,data:{measurements:[measured]}})).ok()).toBeTruthy();
+  await page.goto('/');await page.getByTestId('nav-automation').click();
+  await page.getByTestId('automation-operation-painting').click();
+  await page.getByRole('searchbox',{name:'Найти оборудование'}).fill(id);
+  const arm=page.getByRole('img',{name:`Механическая рука ${id}`});
+  await expect(arm).toBeVisible();
+  await expect(page.locator('.consumable').filter({hasText:'Краска в ёмкости'})).toContainText('42,5');
+  await expect(arm.locator('.arm-joint').first()).toHaveAttribute('transform','rotate(-45)');
+  expect((await request.post('/api/robots/measurements',{headers,data:{measurements:[{...measured,timestamp:new Date(start+1000).toISOString(),paint_volume_l:41.8,joint_2_deg:-25,cycle_progress_pct:60}]}})).ok()).toBeTruthy();
+  await expect(arm.locator('.arm-joint').first()).toHaveAttribute('transform','rotate(-25)');
+  await expect(page.locator('.consumable').filter({hasText:'Краска в ёмкости'})).toContainText('41,8');
+  const reason=`Проверка технологом перед остановкой ${id}`;
+  await page.getByLabel('Основание команды',{exact:true}).fill(reason);
+  const proposalResponse=page.waitForResponse(response=>response.request().method()==='POST'&&response.url().endsWith('/api/automation/commands'));
+  await page.getByRole('button',{name:'Подготовить команду',exact:true}).click();
+  const proposed=await proposalResponse;expect(proposed.ok()).toBeTruthy();
+  const proposal=await proposed.json();
+  expect(proposal).toMatchObject({robot_id:id,action:'hold',reason,status:'proposed',origin:'operator'});
+  const command=page.locator('.command-list article').filter({hasText:id}).filter({hasText:reason});
+  await expect(command).toHaveCount(1);
+  await expect(command.getByText('Предложение · Оператор',{exact:true})).toBeVisible();
+  await expect(command.getByRole('button',{name:'Проверить и подтвердить',exact:true})).toBeDisabled();
+  const cancelResponse=page.waitForResponse(response=>response.request().method()==='POST'&&response.url().endsWith(`/api/automation/commands/${proposal.id}/cancel`));
+  await command.getByRole('button',{name:'Отменить',exact:true}).click();
+  const cancelled=await cancelResponse;expect(cancelled.ok()).toBeTruthy();
+  expect(await cancelled.json()).toMatchObject({id:proposal.id,robot_id:id,status:'cancelled'});
+  await expect(command.getByText('Отменено · Оператор',{exact:true})).toBeVisible();
+  await page.evaluate(()=>window.scrollTo(0,0));
+  await page.screenshot({path:testInfo.outputPath('automation-desktop.png'),fullPage:true,animations:'disabled'});
+  await page.setViewportSize({width:390,height:844});
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(392);
+  await page.screenshot({path:testInfo.outputPath('automation-mobile.png'),fullPage:true,animations:'disabled'});
+});
+
+test('local model answers using the uploaded report without creating a physical command',async({page},testInfo)=>{
+  test.skip(!process.env.TEST_LOCAL_AI, 'Real local model check is explicitly enabled on the installation with downloaded weights.');
+  test.setTimeout(200000);
+  await page.goto('/');await page.getByTestId('nav-ai').click();
+  await expect(page.getByText('Локальная модель готова',{exact:true})).toBeVisible();
+  await page.getByLabel('Вопрос локальному ИИ').fill('Сравни сумму месячных планов по моделям с общим ориентиром. Назови разницу в штуках. Достаточно ли данных для OEE? Ответь кратко, команды не предлагай.');
+  await page.getByRole('button',{name:'Выполнить локальный анализ',exact:true}).click();
+  const answer=page.getByRole('article',{name:'Ответ локального ИИ'});
+  await expect(answer).toBeVisible({timeout:170000});
+  await expect(answer).toContainText('700');
+  await expect(answer).toContainText('Команды оборудованию не создавались');
+  await page.evaluate(()=>window.scrollTo(0,0));
+  await page.screenshot({path:testInfo.outputPath('local-ai.png'),fullPage:true,animations:'disabled'});
+});
+

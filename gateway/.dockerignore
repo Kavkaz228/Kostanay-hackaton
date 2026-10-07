@@ -1,0 +1,5 @@
+.secrets
+gateway.json
+data
+__pycache__
+*.sqlite*

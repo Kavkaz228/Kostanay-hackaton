@@ -1,0 +1,14 @@
+{
+  "users": 450,
+  "duration_seconds": 182.11,
+  "dashboard_requests": 40441,
+  "dashboard_rps": 224.67,
+  "dashboard_p50_ms": 6.76,
+  "dashboard_p95_ms": 43.74,
+  "dashboard_p99_ms": 84.73,
+  "ingestion_batches": 180,
+  "measurements_sent": 18000,
+  "ingestion_p95_ms": 77.69,
+  "mean_dashboard_bytes": 127715,
+  "errors": {}
+}
