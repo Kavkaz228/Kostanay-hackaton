@@ -5,7 +5,18 @@
 
 ## Онлайн-демо: [allur-twin-demo.onrender.com](https://allur-twin-demo.onrender.com)
 
-**Ссылка:** https://allur-twin-demo.onrender.com — логин `jury`, пароль передаётся вместе со ссылкой на проект.  
+| | |
+|---|---|
+| **Ссылка** | https://allur-twin-demo.onrender.com |
+| **Логин** | `jury` |
+| **Пароль** | `A0oKO2PXyeR6Te66bcm9heSctlHPlqI7ZfZSfYrK3w0=` |
+
+Пароль для копирования (кнопка справа от строки):
+
+```
+A0oKO2PXyeR6Te66bcm9heSctlHPlqI7ZfZSfYrK3w0=
+```
+
 Демо на бесплатном сервере: если его долго никто не открывал, первая загрузка занимает около минуты.
 
 **Видео-демонстрация, 3 минуты:** [docs/media/allur-twin-demo.mp4](docs/media/allur-twin-demo.mp4)
