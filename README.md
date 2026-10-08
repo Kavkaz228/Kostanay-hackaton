@@ -3,6 +3,19 @@
 Веб-приложение для сборочного производства: модель линии в реальном времени, автоматизация участков, роботы и конвейер
 с датчиками и износом, плановое ТО и склад запчастей, сценарии «что если», журнал инцидентов и локальный ИИ-помощник.
 
+## Видео и презентация
+
+<table>
+<tr>
+<td width="50%"><a href="docs/media/allur-twin-demo.mp4"><img src="docs/media/video-cover.jpg" alt="Видео-демонстрация Allur twin 2.0"></a></td>
+<td width="50%"><a href="docs/presentation/Allur-twin-2.0-presentation.pdf"><img src="docs/media/presentation-cover.jpg" alt="Презентация Allur twin 2.0"></a></td>
+</tr>
+<tr>
+<td><b><a href="docs/media/allur-twin-demo.mp4">Видео-демонстрация</a></b> — 3 минуты, с озвучкой и музыкой</td>
+<td><b><a href="docs/presentation/Allur-twin-2.0-presentation.pdf">Презентация (PDF)</a></b> — 15 слайдов</td>
+</tr>
+</table>
+
 ## Онлайн-демо: [allur-twin-demo.onrender.com](https://allur-twin-demo.onrender.com)
 
 | | |
@@ -18,8 +31,6 @@ A0oKO2PXyeR6Te66bcm9heSctlHPlqI7ZfZSfYrK3w0=
 ```
 
 Демо на бесплатном сервере: если его долго никто не открывал, первая загрузка занимает около минуты.
-
-**Видео-демонстрация с озвучкой, 3 минуты:** [docs/media/allur-twin-demo.mp4](docs/media/allur-twin-demo.mp4)
 
 ![Линия с роботами R1–R4](docs/media/preview.gif)
 
