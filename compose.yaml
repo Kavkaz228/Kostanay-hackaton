@@ -37,6 +37,7 @@ services:
       COOKIE_SECURE: ${COOKIE_SECURE:-false}
       PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:-}
       AI_MODEL: ${AI_MODEL:-qwen3:4b}
+      MONITORING_AI_ENABLED: ${MONITORING_AI_ENABLED:-true}
       PHYSICAL_CONTROL_ENABLED: ${PHYSICAL_CONTROL_ENABLED:-false}
       TZ: Asia/Qyzylorda
     networks: [default, inference]

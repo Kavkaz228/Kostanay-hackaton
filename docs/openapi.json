@@ -1,0 +1,5351 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Allur twin 2.0",
+    "description": "Модель производства и импорт измерений",
+    "version": "2.0.0"
+  },
+  "paths": {
+    "/api/auth/login": {
+      "post": {
+        "summary": "Login",
+        "operationId": "login_api_auth_login_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/me": {
+      "get": {
+        "summary": "Me",
+        "operationId": "me_api_auth_me_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "summary": "Logout",
+        "operationId": "logout_api_auth_logout_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/password": {
+      "post": {
+        "summary": "Change Password",
+        "operationId": "change_password_api_auth_password_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PasswordChange"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/users": {
+      "get": {
+        "summary": "Users",
+        "operationId": "users_api_admin_users_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "New User",
+        "operationId": "new_user_api_admin_users_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUser"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/users/{user_id}": {
+      "patch": {
+        "summary": "Edit User",
+        "operationId": "edit_user_api_admin_users__user_id__patch",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "User Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/tokens": {
+      "get": {
+        "summary": "Tokens",
+        "operationId": "tokens_api_admin_tokens_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "New Token",
+        "operationId": "new_token_api_admin_tokens_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewToken"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/tokens/{token_id}": {
+      "delete": {
+        "summary": "Revoke Token",
+        "operationId": "revoke_token_api_admin_tokens__token_id__delete",
+        "parameters": [
+          {
+            "name": "token_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Token Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/audit": {
+      "get": {
+        "summary": "Audit Log",
+        "operationId": "audit_log_api_admin_audit_get",
+        "parameters": [
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 2147483647,
+              "title": "Before"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/automation": {
+      "get": {
+        "summary": "Automation",
+        "operationId": "automation_api_automation_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/automation/commands": {
+      "post": {
+        "summary": "Command",
+        "operationId": "command_api_automation_commands_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/automation/commands/{command_id}/approve": {
+      "post": {
+        "summary": "Approve",
+        "operationId": "approve_api_automation_commands__command_id__approve_post",
+        "parameters": [
+          {
+            "name": "command_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Command Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Approval"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/automation/commands/{command_id}/cancel": {
+      "post": {
+        "summary": "Cancel",
+        "operationId": "cancel_api_automation_commands__command_id__cancel_post",
+        "parameters": [
+          {
+            "name": "command_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Command Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/gateways": {
+      "get": {
+        "summary": "Gateways",
+        "operationId": "gateways_api_admin_gateways_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Gateway",
+        "operationId": "create_gateway_api_admin_gateways_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GatewayCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/gateways/{key}": {
+      "delete": {
+        "summary": "Revoke Gateway",
+        "operationId": "revoke_gateway_api_admin_gateways__key__delete",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/gateway/next": {
+      "post": {
+        "summary": "Next Command",
+        "operationId": "next_command_api_gateway_next_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/gateway/result": {
+      "post": {
+        "summary": "Command Result",
+        "operationId": "command_result_api_gateway_result_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandResult"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/commands/{command_id}/reconcile": {
+      "post": {
+        "summary": "Reconcile",
+        "operationId": "reconcile_api_admin_commands__command_id__reconcile_post",
+        "parameters": [
+          {
+            "name": "command_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Command Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Reconciliation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ai/status": {
+      "get": {
+        "summary": "Status",
+        "operationId": "status_api_ai_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ai/context": {
+      "get": {
+        "summary": "Context Preview",
+        "operationId": "context_preview_api_ai_context_get",
+        "parameters": [
+          {
+            "name": "data_source",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "plant",
+                "emulation",
+                "simulation"
+              ],
+              "type": "string",
+              "default": "plant",
+              "title": "Data Source"
+            }
+          },
+          {
+            "name": "robot_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 128
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Robot Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ai/analyze": {
+      "post": {
+        "summary": "Analyze",
+        "operationId": "analyze_api_ai_analyze_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AIQuestion"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/monitoring": {
+      "get": {
+        "summary": "Monitoring",
+        "operationId": "monitoring_api_monitoring_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/monitoring/{identifier}/acknowledge": {
+      "post": {
+        "summary": "Acknowledge",
+        "operationId": "acknowledge_api_monitoring__identifier__acknowledge_post",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Identifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scada": {
+      "get": {
+        "tags": [
+          "Оборудование, ТО и склад"
+        ],
+        "summary": "Overview",
+        "operationId": "overview_api_scada_get",
+        "parameters": [
+          {
+            "name": "operation",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "welding",
+                    "painting",
+                    "assembly",
+                    "unknown"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Operation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scada/assets": {
+      "post": {
+        "tags": [
+          "Оборудование, ТО и склад"
+        ],
+        "summary": "Create Asset",
+        "operationId": "create_asset_api_scada_assets_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scada/assets/{asset_id}/operation": {
+      "put": {
+        "tags": [
+          "Оборудование, ТО и склад"
+        ],
+        "summary": "Update Asset Operation",
+        "operationId": "update_asset_operation_api_scada_assets__asset_id__operation_put",
+        "parameters": [
+          {
+            "name": "asset_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Asset Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetOperationUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scada/components": {
+      "post": {
+        "tags": [
+          "Оборудование, ТО и склад"
+        ],
+        "summary": "Create Component",
+        "operationId": "create_component_api_scada_components_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComponentBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scada/components/{component_id}": {
+      "put": {
+        "tags": [
+          "Оборудование, ТО и склад"
+        ],
+        "summary": "Update Component",
+        "operationId": "update_component_api_scada_components__component_id__put",
+        "parameters": [
+          {
+            "name": "component_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Component Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComponentUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scada/assets/{asset_id}/template": {
+      "post": {
+        "tags": [
+          "Оборудование, ТО и склад"
+        ],
+        "summary": "Asset Template",
+        "description": "Equipment topology from the supplied stand, with unknown measurements/life.",
+        "operationId": "asset_template_api_scada_assets__asset_id__template_post",
+        "parameters": [
+          {
+            "name": "asset_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Asset Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scada/readings": {
+      "post": {
+        "tags": [
+          "Оборудование, ТО и склад"
+        ],
+        "summary": "Ingest",
+        "operationId": "ingest_api_scada_readings_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReadingBatch"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scada/template": {
+      "get": {
+        "tags": [
+          "Оборудование, ТО и склад"
+        ],
+        "summary": "Csv Template",
+        "operationId": "csv_template_api_scada_template_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scada/import": {
+      "post": {
+        "tags": [
+          "Оборудование, ТО и склад"
+        ],
+        "summary": "Import Csv",
+        "operationId": "import_csv_api_scada_import_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_import_csv_api_scada_import_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scada/history": {
+      "get": {
+        "tags": [
+          "Оборудование, ТО и склад"
+        ],
+        "summary": "History",
+        "operationId": "history_api_scada_history_get",
+        "parameters": [
+          {
+            "name": "component_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Component Id"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 2147483647,
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "minimum": 1,
+              "default": 100,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scada/export": {
+      "get": {
+        "tags": [
+          "Оборудование, ТО и склад"
+        ],
+        "summary": "Export Readings",
+        "operationId": "export_readings_api_scada_export_get",
+        "parameters": [
+          {
+            "name": "component_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Component Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scada/alarms/{alarm_id}/acknowledge": {
+      "post": {
+        "tags": [
+          "Оборудование, ТО и склад"
+        ],
+        "summary": "Acknowledge",
+        "operationId": "acknowledge_api_scada_alarms__alarm_id__acknowledge_post",
+        "parameters": [
+          {
+            "name": "alarm_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Alarm Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scada/calendar": {
+      "put": {
+        "tags": [
+          "Оборудование, ТО и склад"
+        ],
+        "summary": "Configure Calendar",
+        "operationId": "configure_calendar_api_scada_calendar_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalendarBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scada/parts": {
+      "post": {
+        "tags": [
+          "Оборудование, ТО и склад"
+        ],
+        "summary": "Create Part",
+        "operationId": "create_part_api_scada_parts_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PartBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scada/stock": {
+      "post": {
+        "tags": [
+          "Оборудование, ТО и склад"
+        ],
+        "summary": "Adjust Stock",
+        "operationId": "adjust_stock_api_scada_stock_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StockBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scada/journal": {
+      "get": {
+        "tags": [
+          "Оборудование, ТО и склад"
+        ],
+        "summary": "Journal",
+        "operationId": "journal_api_scada_journal_get",
+        "parameters": [
+          {
+            "name": "kind",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^(movement|order|task|alarm)$",
+              "default": "movement",
+              "title": "Kind"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 2147483647,
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          },
+          {
+            "name": "operation",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "welding",
+                    "painting",
+                    "assembly",
+                    "unknown"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Operation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scada/offers": {
+      "post": {
+        "tags": [
+          "Оборудование, ТО и склад"
+        ],
+        "summary": "Create Offer",
+        "operationId": "create_offer_api_scada_offers_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OfferBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scada/orders": {
+      "post": {
+        "tags": [
+          "Оборудование, ТО и склад"
+        ],
+        "summary": "Create Order",
+        "operationId": "create_order_api_scada_orders_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scada/orders/{order_id}/confirm": {
+      "post": {
+        "tags": [
+          "Оборудование, ТО и склад"
+        ],
+        "summary": "Confirm Order",
+        "operationId": "confirm_order_api_scada_orders__order_id__confirm_post",
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Order Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderConfirm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scada/orders/{order_id}/receive": {
+      "post": {
+        "tags": [
+          "Оборудование, ТО и склад"
+        ],
+        "summary": "Receive Order",
+        "operationId": "receive_order_api_scada_orders__order_id__receive_post",
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Order Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReceiveBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scada/orders/{order_id}/cancel": {
+      "post": {
+        "tags": [
+          "Оборудование, ТО и склад"
+        ],
+        "summary": "Cancel Order",
+        "operationId": "cancel_order_api_scada_orders__order_id__cancel_post",
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Order Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scada/tasks": {
+      "post": {
+        "tags": [
+          "Оборудование, ТО и склад"
+        ],
+        "summary": "Create Task",
+        "operationId": "create_task_api_scada_tasks_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scada/tasks/{task_id}/complete": {
+      "post": {
+        "tags": [
+          "Оборудование, ТО и склад"
+        ],
+        "summary": "Complete Task",
+        "operationId": "complete_task_api_scada_tasks__task_id__complete_post",
+        "parameters": [
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Task Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskComplete"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scada/tasks/{task_id}/cancel": {
+      "post": {
+        "tags": [
+          "Оборудование, ТО и склад"
+        ],
+        "summary": "Cancel Task",
+        "operationId": "cancel_task_api_scada_tasks__task_id__cancel_post",
+        "parameters": [
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Task Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/emulation": {
+      "get": {
+        "tags": [
+          "Эмуляция SCADA"
+        ],
+        "summary": "Snapshot",
+        "operationId": "snapshot_api_emulation_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/emulation/commands": {
+      "post": {
+        "tags": [
+          "Эмуляция SCADA"
+        ],
+        "summary": "Command",
+        "operationId": "command_api_emulation_commands_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Command"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/emulation/components/{identity}": {
+      "get": {
+        "tags": [
+          "Эмуляция SCADA"
+        ],
+        "summary": "Component",
+        "operationId": "component_api_emulation_components__identity__get",
+        "parameters": [
+          {
+            "name": "identity",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Identity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/emulation/assistant": {
+      "post": {
+        "tags": [
+          "Эмуляция SCADA"
+        ],
+        "summary": "Assistant",
+        "operationId": "assistant_api_emulation_assistant_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Question"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_api_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/state": {
+      "get": {
+        "summary": "State",
+        "operationId": "state_api_state_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/dashboard": {
+      "get": {
+        "summary": "Dashboard",
+        "operationId": "dashboard_api_dashboard_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/system": {
+      "get": {
+        "summary": "System Status",
+        "operationId": "system_status_api_admin_system_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/history": {
+      "get": {
+        "summary": "History",
+        "operationId": "history_api_history_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 2000,
+              "minimum": 1,
+              "default": 120,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "run_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Run Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/incidents": {
+      "get": {
+        "summary": "Incidents",
+        "operationId": "incidents_api_incidents_get",
+        "parameters": [
+          {
+            "name": "include_archived",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Include Archived"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/incidents/export": {
+      "get": {
+        "summary": "Incident Export",
+        "operationId": "incident_export_api_incidents_export_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/incidents/{incident_id}/acknowledge": {
+      "post": {
+        "summary": "Acknowledge",
+        "operationId": "acknowledge_api_incidents__incident_id__acknowledge_post",
+        "parameters": [
+          {
+            "name": "incident_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Incident Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/control": {
+      "post": {
+        "summary": "Control",
+        "operationId": "control_api_control_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Control"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/advance": {
+      "post": {
+        "summary": "Advance",
+        "operationId": "advance_api_advance_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Advance"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/stations/{station_id}": {
+      "patch": {
+        "summary": "Station",
+        "operationId": "station_api_stations__station_id__patch",
+        "parameters": [
+          {
+            "name": "station_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Station Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StationChange"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/reset": {
+      "post": {
+        "summary": "Reset",
+        "operationId": "reset_api_reset_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Reset"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/source": {
+      "post": {
+        "summary": "Source",
+        "operationId": "source_api_source_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Source"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scenarios": {
+      "get": {
+        "summary": "Scenarios",
+        "operationId": "scenarios_api_scenarios_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Scenario",
+        "operationId": "scenario_api_scenarios_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScenarioRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/export": {
+      "get": {
+        "summary": "Export",
+        "operationId": "export_api_export_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/robots/history": {
+      "get": {
+        "summary": "Robot History",
+        "operationId": "robot_history_api_robots_history_get",
+        "parameters": [
+          {
+            "name": "robot_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "title": "Robot Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 20000,
+              "minimum": 1,
+              "default": 2000,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Start"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "End"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 2147483647,
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/robots/config": {
+      "get": {
+        "summary": "Robot Config",
+        "operationId": "robot_config_api_robots_config_get",
+        "parameters": [
+          {
+            "name": "robot_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "title": "Robot Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Configure Robot",
+        "operationId": "configure_robot_api_robots_config_put",
+        "parameters": [
+          {
+            "name": "robot_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "title": "Robot Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RobotConfig"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/robots/analytics": {
+      "get": {
+        "summary": "Robot Analytics",
+        "operationId": "robot_analytics_api_robots_analytics_get",
+        "parameters": [
+          {
+            "name": "robot_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Robot Id"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Start"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "End"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/robots/detail": {
+      "get": {
+        "summary": "Robot Detail",
+        "operationId": "robot_detail_api_robots_detail_get",
+        "parameters": [
+          {
+            "name": "robot_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "title": "Robot Id"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Start"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "End"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 2147483647,
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/robots/measurements": {
+      "post": {
+        "summary": "Ingest Measurements",
+        "operationId": "ingest_measurements_api_robots_measurements_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MeasurementBatch"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/imports": {
+      "get": {
+        "summary": "Imports",
+        "operationId": "imports_api_imports_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/robots/export": {
+      "get": {
+        "summary": "Robot Export",
+        "operationId": "robot_export_api_robots_export_get",
+        "parameters": [
+          {
+            "name": "robot_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Robot Id"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Start"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "End"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/import/robots-template": {
+      "get": {
+        "summary": "Robot Template",
+        "operationId": "robot_template_api_import_robots_template_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/manufacturing": {
+      "get": {
+        "summary": "Manufacturing",
+        "operationId": "manufacturing_api_manufacturing_get",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 100,
+              "default": "",
+              "title": "Search"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 2147483647,
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/quality/records": {
+      "post": {
+        "summary": "Quality Records",
+        "operationId": "quality_records_api_quality_records_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QualityBatch"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/quality/template": {
+      "get": {
+        "summary": "Quality Template",
+        "operationId": "quality_template_api_quality_template_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/quality/export": {
+      "get": {
+        "summary": "Quality Export",
+        "operationId": "quality_export_api_quality_export_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/import/template": {
+      "get": {
+        "summary": "Import Template",
+        "operationId": "import_template_api_import_template_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/import": {
+      "post": {
+        "summary": "Import Csv",
+        "operationId": "import_csv_api_import_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_import_csv_api_import_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/import/preview": {
+      "post": {
+        "summary": "Preview Csv",
+        "operationId": "preview_csv_api_import_preview_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_preview_csv_api_import_preview_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/events": {
+      "get": {
+        "summary": "Events",
+        "operationId": "events_api_events_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AIQuestion": {
+        "properties": {
+          "question": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 3,
+            "title": "Question"
+          },
+          "robot_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 128
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Robot Id"
+          },
+          "allow_command": {
+            "type": "boolean",
+            "title": "Allow Command",
+            "default": false
+          },
+          "data_source": {
+            "type": "string",
+            "enum": [
+              "plant",
+              "emulation",
+              "simulation"
+            ],
+            "title": "Data Source",
+            "default": "plant"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "question"
+        ],
+        "title": "AIQuestion"
+      },
+      "Advance": {
+        "properties": {
+          "seconds": {
+            "type": "integer",
+            "maximum": 3600.0,
+            "minimum": 1.0,
+            "title": "Seconds"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "seconds"
+        ],
+        "title": "Advance"
+      },
+      "Approval": {
+        "properties": {
+          "confirm": {
+            "type": "boolean",
+            "const": true,
+            "title": "Confirm"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "confirm"
+        ],
+        "title": "Approval"
+      },
+      "AssetBody": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9А-Яа-яЁё_.:-]+$",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "Name"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "robot",
+              "conveyor",
+              "equipment"
+            ],
+            "title": "Kind"
+          },
+          "section": {
+            "type": "string",
+            "maxLength": 160,
+            "title": "Section",
+            "default": ""
+          },
+          "robot_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Robot Id"
+          },
+          "operation": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "welding",
+                  "painting",
+                  "assembly",
+                  "unknown"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "kind"
+        ],
+        "title": "AssetBody"
+      },
+      "AssetOperationUpdate": {
+        "properties": {
+          "operation": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "welding",
+                  "painting",
+                  "assembly",
+                  "unknown"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operation"
+          },
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Revision"
+          },
+          "request_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 16,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Request Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "operation",
+          "expected_revision",
+          "request_id"
+        ],
+        "title": "AssetOperationUpdate"
+      },
+      "Body_import_csv_api_import_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "File"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_import_csv_api_import_post"
+      },
+      "Body_import_csv_api_scada_import_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "File"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_import_csv_api_scada_import_post"
+      },
+      "Body_preview_csv_api_import_preview_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "File"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_preview_csv_api_import_preview_post"
+      },
+      "CalendarBody": {
+        "properties": {
+          "hours_per_day": {
+            "type": "integer",
+            "maximum": 24.0,
+            "minimum": 1.0,
+            "title": "Hours Per Day",
+            "default": 16
+          },
+          "weekdays": {
+            "items": {
+              "type": "integer",
+              "maximum": 6.0,
+              "minimum": 0.0
+            },
+            "type": "array",
+            "maxItems": 7,
+            "minItems": 1,
+            "title": "Weekdays"
+          },
+          "holidays": {
+            "items": {
+              "type": "string",
+              "format": "date"
+            },
+            "type": "array",
+            "maxItems": 1000,
+            "title": "Holidays"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "CalendarBody"
+      },
+      "Command": {
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 16,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Request Id"
+          },
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expected Revision"
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "pause",
+              "play",
+              "speed",
+              "advance",
+              "stop",
+              "restart",
+              "fault",
+              "ack",
+              "replace",
+              "stock",
+              "reset",
+              "order",
+              "order_all",
+              "channel",
+              "summary",
+              "notification_read",
+              "notification_read_all"
+            ],
+            "title": "Action"
+          },
+          "target": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target"
+          },
+          "active": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Active"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "request_id",
+          "expected_revision",
+          "action"
+        ],
+        "title": "Command"
+      },
+      "CommandBody": {
+        "properties": {
+          "robot_id": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Robot Id"
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "hold",
+              "resume",
+              "set_speed_percent"
+            ],
+            "title": "Action"
+          },
+          "speed_percent": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Speed Percent"
+          },
+          "reason": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 3,
+            "title": "Reason"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "robot_id",
+          "action",
+          "reason"
+        ],
+        "title": "CommandBody"
+      },
+      "CommandResult": {
+        "properties": {
+          "command_id": {
+            "type": "string",
+            "title": "Command Id"
+          },
+          "lease": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 20,
+            "title": "Lease"
+          },
+          "result": {
+            "type": "string",
+            "enum": [
+              "succeeded",
+              "failed",
+              "uncertain"
+            ],
+            "title": "Result"
+          },
+          "detail": {
+            "type": "string",
+            "maxLength": 500,
+            "title": "Detail"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "command_id",
+          "lease",
+          "result",
+          "detail"
+        ],
+        "title": "CommandResult"
+      },
+      "ComponentBody": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9А-Яа-яЁё_.:-]+$",
+            "title": "Id"
+          },
+          "asset_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9А-Яа-яЁё_.:-]+$",
+            "title": "Asset Id"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "Name"
+          },
+          "node": {
+            "type": "string",
+            "maxLength": 80,
+            "title": "Node",
+            "default": ""
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "motor",
+              "reducer",
+              "brake",
+              "cable",
+              "battery",
+              "fan",
+              "tool",
+              "chain",
+              "lubricator",
+              "sensor",
+              "other"
+            ],
+            "title": "Kind",
+            "default": "other"
+          },
+          "part_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9А-Яа-яЁё_.:-]+$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Part Id"
+          },
+          "part_quantity": {
+            "type": "integer",
+            "maximum": 100000.0,
+            "minimum": 1.0,
+            "title": "Part Quantity",
+            "default": 1
+          },
+          "life_model": {
+            "type": "string",
+            "enum": [
+              "none",
+              "hours",
+              "cycles",
+              "distance",
+              "thermal",
+              "reducer",
+              "chain",
+              "calendar"
+            ],
+            "title": "Life Model",
+            "default": "none"
+          },
+          "rated_life": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1000000000000.0,
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rated Life"
+          },
+          "initial_wear_pct": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Initial Wear Pct"
+          },
+          "reference_temperature_c": {
+            "type": "number",
+            "maximum": 250.0,
+            "minimum": -50.0,
+            "title": "Reference Temperature C",
+            "default": 80
+          },
+          "commissioned_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commissioned At"
+          },
+          "specification": {
+            "type": "string",
+            "maxLength": 500,
+            "title": "Specification",
+            "default": ""
+          },
+          "expected_interval_seconds": {
+            "type": "integer",
+            "maximum": 86400.0,
+            "minimum": 1.0,
+            "title": "Expected Interval Seconds",
+            "default": 60
+          },
+          "thresholds": {
+            "items": {
+              "$ref": "#/components/schemas/Threshold"
+            },
+            "type": "array",
+            "maxItems": 30,
+            "title": "Thresholds"
+          },
+          "robot_metric_map": {
+            "patternProperties": {
+              "^[A-Za-z0-9А-Яа-яЁё_.:-]+$": {
+                "type": "string",
+                "maxLength": 100,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9А-Яа-яЁё_.:-]+$"
+              }
+            },
+            "propertyNames": {
+              "maxLength": 100,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 30,
+            "title": "Robot Metric Map"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "asset_id",
+          "name"
+        ],
+        "title": "ComponentBody"
+      },
+      "ComponentUpdate": {
+        "properties": {
+          "config": {
+            "$ref": "#/components/schemas/ComponentBody"
+          },
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Revision"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "config",
+          "expected_revision"
+        ],
+        "title": "ComponentUpdate"
+      },
+      "Control": {
+        "properties": {
+          "running": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Running"
+          },
+          "speed": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "enum": [
+                  1,
+                  10,
+                  30,
+                  60,
+                  120
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Speed"
+          },
+          "shift_plan": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Shift Plan"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "Control"
+      },
+      "EditUser": {
+        "properties": {
+          "role": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Role"
+          },
+          "active": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Active"
+          },
+          "password": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 15
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Password"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "EditUser"
+      },
+      "ErrorDefinition": {
+        "properties": {
+          "description": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 1,
+            "title": "Description"
+          },
+          "action": {
+            "type": "string",
+            "maxLength": 500,
+            "title": "Action",
+            "default": ""
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "warning",
+              "critical"
+            ],
+            "title": "Severity",
+            "default": "warning"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "description"
+        ],
+        "title": "ErrorDefinition"
+      },
+      "GatewayCreate": {
+        "properties": {
+          "robot_id": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Robot Id"
+          },
+          "days": {
+            "type": "integer",
+            "maximum": 90.0,
+            "minimum": 1.0,
+            "title": "Days",
+            "default": 30
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "robot_id"
+        ],
+        "title": "GatewayCreate"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "Login": {
+        "properties": {
+          "username": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Username"
+          },
+          "password": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Password"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "username",
+          "password"
+        ],
+        "title": "Login"
+      },
+      "MeasurementBatch": {
+        "properties": {
+          "measurements": {
+            "items": {
+              "$ref": "#/components/schemas/RobotMeasurement"
+            },
+            "type": "array",
+            "maxItems": 1000,
+            "minItems": 1,
+            "title": "Measurements"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "measurements"
+        ],
+        "title": "MeasurementBatch"
+      },
+      "NewToken": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Name"
+          },
+          "days": {
+            "type": "integer",
+            "maximum": 365.0,
+            "minimum": 1.0,
+            "title": "Days",
+            "default": 90
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "NewToken"
+      },
+      "NewUser": {
+        "properties": {
+          "username": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Username"
+          },
+          "password": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Password"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "username",
+          "password",
+          "role"
+        ],
+        "title": "NewUser"
+      },
+      "OfferBody": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9А-Яа-яЁё_.:-]+$",
+            "title": "Id"
+          },
+          "part_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9А-Яа-яЁё_.:-]+$",
+            "title": "Part Id"
+          },
+          "supplier": {
+            "type": "string",
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "Supplier"
+          },
+          "price_minor": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "Price Minor"
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "KZT",
+              "RUB",
+              "USD",
+              "EUR",
+              "CNY"
+            ],
+            "title": "Currency",
+            "default": "KZT"
+          },
+          "lead_workdays": {
+            "type": "integer",
+            "maximum": 730.0,
+            "minimum": 0.0,
+            "title": "Lead Workdays"
+          },
+          "valid_until": {
+            "type": "string",
+            "format": "date",
+            "title": "Valid Until"
+          },
+          "reference": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 3,
+            "title": "Reference"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "part_id",
+          "supplier",
+          "price_minor",
+          "lead_workdays",
+          "valid_until",
+          "reference"
+        ],
+        "title": "OfferBody"
+      },
+      "OrderBody": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9А-Яа-яЁё_.:-]+$",
+            "title": "Id"
+          },
+          "offer_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9А-Яа-яЁё_.:-]+$",
+            "title": "Offer Id"
+          },
+          "quantity": {
+            "type": "integer",
+            "maximum": 1000000.0,
+            "minimum": 1.0,
+            "title": "Quantity"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "offer_id",
+          "quantity"
+        ],
+        "title": "OrderBody"
+      },
+      "OrderConfirm": {
+        "properties": {
+          "reference": {
+            "type": "string",
+            "maxLength": 300,
+            "minLength": 3,
+            "title": "Reference"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "reference"
+        ],
+        "title": "OrderConfirm"
+      },
+      "PartBody": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9А-Яа-яЁё_.:-]+$",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "Name"
+          },
+          "unit": {
+            "type": "string",
+            "maxLength": 24,
+            "minLength": 1,
+            "title": "Unit",
+            "default": "шт."
+          },
+          "minimum": {
+            "type": "integer",
+            "maximum": 1000000.0,
+            "minimum": 0.0,
+            "title": "Minimum",
+            "default": 0
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "PartBody"
+      },
+      "PasswordChange": {
+        "properties": {
+          "current_password": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Current Password"
+          },
+          "new_password": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 15,
+            "title": "New Password"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "current_password",
+          "new_password"
+        ],
+        "title": "PasswordChange"
+      },
+      "QualityBatch": {
+        "properties": {
+          "records": {
+            "items": {
+              "$ref": "#/components/schemas/VehicleQuality"
+            },
+            "type": "array",
+            "maxItems": 1000,
+            "minItems": 1,
+            "title": "Records"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "records"
+        ],
+        "title": "QualityBatch"
+      },
+      "Question": {
+        "properties": {
+          "question": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Question"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "question"
+        ],
+        "title": "Question"
+      },
+      "Reading": {
+        "properties": {
+          "record_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9А-Яа-яЁё_.:-]+$",
+            "title": "Record Id"
+          },
+          "component_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9А-Яа-яЁё_.:-]+$",
+            "title": "Component Id"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
+          "metrics": {
+            "patternProperties": {
+              "^[A-Za-z0-9А-Яа-яЁё_.:-]+$": {
+                "type": "number",
+                "maximum": 1000000000.0,
+                "minimum": -1000000000.0
+              }
+            },
+            "propertyNames": {
+              "maxLength": 100,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 40,
+            "title": "Metrics"
+          },
+          "runtime_hours": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1000000000.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Runtime Hours"
+          },
+          "total_cycles": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000000000000000.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Cycles"
+          },
+          "distance_km": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1000000000000.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Distance Km"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "record_id",
+          "component_id",
+          "timestamp"
+        ],
+        "title": "Reading"
+      },
+      "ReadingBatch": {
+        "properties": {
+          "readings": {
+            "items": {
+              "$ref": "#/components/schemas/Reading"
+            },
+            "type": "array",
+            "maxItems": 1000,
+            "minItems": 1,
+            "title": "Readings"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "readings"
+        ],
+        "title": "ReadingBatch"
+      },
+      "ReceiveBody": {
+        "properties": {
+          "record_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9А-Яа-яЁё_.:-]+$",
+            "title": "Record Id"
+          },
+          "quantity": {
+            "type": "integer",
+            "maximum": 1000000.0,
+            "minimum": 1.0,
+            "title": "Quantity"
+          },
+          "reference": {
+            "type": "string",
+            "maxLength": 300,
+            "minLength": 3,
+            "title": "Reference"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "record_id",
+          "quantity",
+          "reference"
+        ],
+        "title": "ReceiveBody"
+      },
+      "Reconciliation": {
+        "properties": {
+          "confirm": {
+            "type": "boolean",
+            "const": true,
+            "title": "Confirm"
+          },
+          "result": {
+            "type": "string",
+            "enum": [
+              "succeeded",
+              "failed"
+            ],
+            "title": "Result"
+          },
+          "evidence": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 20,
+            "title": "Evidence"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "confirm",
+          "result",
+          "evidence"
+        ],
+        "title": "Reconciliation"
+      },
+      "Reset": {
+        "properties": {
+          "confirm": {
+            "type": "boolean",
+            "const": true,
+            "title": "Confirm"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "confirm"
+        ],
+        "title": "Reset"
+      },
+      "RobotConfig": {
+        "properties": {
+          "expected_interval_seconds": {
+            "type": "integer",
+            "maximum": 86400.0,
+            "minimum": 1.0,
+            "title": "Expected Interval Seconds",
+            "default": 60
+          },
+          "limits": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/SensorLimits"
+            },
+            "propertyNames": {
+              "enum": [
+                "joint_temperature_c",
+                "vibration_mm_s",
+                "hydraulic_pressure_bar",
+                "pneumatic_pressure_bar",
+                "pneumatic_pressure",
+                "paint_volume_l",
+                "paint_capacity_l",
+                "electrode_count",
+                "welding_current_a",
+                "motor_current_a",
+                "speed_percent",
+                "cycle_progress_pct"
+              ]
+            },
+            "type": "object",
+            "title": "Limits"
+          },
+          "error_codes": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ErrorDefinition"
+            },
+            "type": "object",
+            "maxProperties": 100,
+            "title": "Error Codes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "RobotConfig"
+      },
+      "RobotMeasurement": {
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Timestamp"
+          },
+          "robot_id": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Robot Id"
+          },
+          "cycle_status": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Cycle Status"
+          },
+          "line_section": {
+            "type": "string",
+            "maxLength": 128,
+            "title": "Line Section",
+            "default": ""
+          },
+          "error_code": {
+            "type": "string",
+            "maxLength": 128,
+            "title": "Error Code",
+            "default": ""
+          },
+          "joint_temperature_c": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Joint Temperature C"
+          },
+          "vibration_mm_s": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vibration Mm S"
+          },
+          "hydraulic_pressure_bar": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hydraulic Pressure Bar"
+          },
+          "pneumatic_pressure_bar": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pneumatic Pressure Bar"
+          },
+          "pneumatic_pressure": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pneumatic Pressure"
+          },
+          "operation": {
+            "type": "string",
+            "enum": [
+              "",
+              "welding",
+              "painting",
+              "assembly"
+            ],
+            "title": "Operation",
+            "default": ""
+          },
+          "controller_mode": {
+            "type": "string",
+            "enum": [
+              "",
+              "automatic",
+              "manual",
+              "offline",
+              "unknown"
+            ],
+            "title": "Controller Mode",
+            "default": ""
+          },
+          "safety_state": {
+            "type": "string",
+            "enum": [
+              "",
+              "normal",
+              "protective_stop",
+              "emergency_stop",
+              "unknown"
+            ],
+            "title": "Safety State",
+            "default": ""
+          },
+          "paint_volume_l": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1000000000.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Paint Volume L"
+          },
+          "paint_capacity_l": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1000000000.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Paint Capacity L"
+          },
+          "electrode_count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000000000.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Electrode Count"
+          },
+          "welding_current_a": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1000000000.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Welding Current A"
+          },
+          "motor_current_a": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1000000000.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motor Current A"
+          },
+          "speed_percent": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Speed Percent"
+          },
+          "cycle_progress_pct": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cycle Progress Pct"
+          },
+          "joint_1_deg": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 3600.0,
+                "minimum": -3600.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Joint 1 Deg"
+          },
+          "joint_2_deg": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 3600.0,
+                "minimum": -3600.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Joint 2 Deg"
+          },
+          "joint_3_deg": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 3600.0,
+                "minimum": -3600.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Joint 3 Deg"
+          },
+          "joint_4_deg": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 3600.0,
+                "minimum": -3600.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Joint 4 Deg"
+          },
+          "joint_5_deg": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 3600.0,
+                "minimum": -3600.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Joint 5 Deg"
+          },
+          "joint_6_deg": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 3600.0,
+                "minimum": -3600.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Joint 6 Deg"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "timestamp",
+          "robot_id",
+          "cycle_status"
+        ],
+        "title": "RobotMeasurement"
+      },
+      "ScenarioChange": {
+        "properties": {
+          "cycle_seconds": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 600.0,
+                "minimum": 5.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cycle Seconds"
+          },
+          "capacity": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 10.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Capacity"
+          },
+          "buffer_capacity": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 200.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Buffer Capacity"
+          },
+          "defect_rate": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 0.5,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Defect Rate"
+          },
+          "speed_factor": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 2.0,
+                "minimum": 0.1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Speed Factor"
+          },
+          "manual_stop": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Manual Stop"
+          },
+          "station_id": {
+            "type": "string",
+            "title": "Station Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "station_id"
+        ],
+        "title": "ScenarioChange"
+      },
+      "ScenarioRequest": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Name"
+          },
+          "horizon_minutes": {
+            "type": "integer",
+            "maximum": 480.0,
+            "minimum": 15.0,
+            "title": "Horizon Minutes"
+          },
+          "changes": {
+            "items": {
+              "$ref": "#/components/schemas/ScenarioChange"
+            },
+            "type": "array",
+            "maxItems": 5,
+            "minItems": 1,
+            "title": "Changes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "horizon_minutes",
+          "changes"
+        ],
+        "title": "ScenarioRequest"
+      },
+      "SensorLimits": {
+        "properties": {
+          "low_critical": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1000000000.0,
+                "minimum": -273.15
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Low Critical"
+          },
+          "low_warning": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1000000000.0,
+                "minimum": -273.15
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Low Warning"
+          },
+          "high_warning": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1000000000.0,
+                "minimum": -273.15
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "High Warning"
+          },
+          "high_critical": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1000000000.0,
+                "minimum": -273.15
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "High Critical"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "SensorLimits"
+      },
+      "Source": {
+        "properties": {
+          "source": {
+            "type": "string",
+            "enum": [
+              "simulation",
+              "telemetry"
+            ],
+            "title": "Source"
+          },
+          "telemetry_kind": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "production",
+                  "robots"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Telemetry Kind"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "source"
+        ],
+        "title": "Source"
+      },
+      "StationChange": {
+        "properties": {
+          "cycle_seconds": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 600.0,
+                "minimum": 5.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cycle Seconds"
+          },
+          "capacity": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 10.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Capacity"
+          },
+          "buffer_capacity": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 200.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Buffer Capacity"
+          },
+          "defect_rate": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 0.5,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Defect Rate"
+          },
+          "speed_factor": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 2.0,
+                "minimum": 0.1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Speed Factor"
+          },
+          "manual_stop": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Manual Stop"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "StationChange"
+      },
+      "StockBody": {
+        "properties": {
+          "record_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9А-Яа-яЁё_.:-]+$",
+            "title": "Record Id"
+          },
+          "part_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9А-Яа-яЁё_.:-]+$",
+            "title": "Part Id"
+          },
+          "quantity": {
+            "type": "integer",
+            "maximum": 1000000.0,
+            "minimum": -1000000.0,
+            "title": "Quantity"
+          },
+          "reason": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 5,
+            "title": "Reason"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "record_id",
+          "part_id",
+          "quantity",
+          "reason"
+        ],
+        "title": "StockBody"
+      },
+      "TaskBody": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9А-Яа-яЁё_.:-]+$",
+            "title": "Id"
+          },
+          "component_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9А-Яа-яЁё_.:-]+$",
+            "title": "Component Id"
+          },
+          "due_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Due Date"
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 5,
+            "title": "Note"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "component_id",
+          "due_date",
+          "note"
+        ],
+        "title": "TaskBody"
+      },
+      "TaskComplete": {
+        "properties": {
+          "evidence": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 5,
+            "title": "Evidence"
+          },
+          "reset_counters": {
+            "type": "boolean",
+            "title": "Reset Counters",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "evidence"
+        ],
+        "title": "TaskComplete"
+      },
+      "Threshold": {
+        "properties": {
+          "metric": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9А-Яа-яЁё_.:-]+$",
+            "title": "Metric"
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "Label"
+          },
+          "unit": {
+            "type": "string",
+            "maxLength": 24,
+            "title": "Unit",
+            "default": ""
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "high",
+              "low"
+            ],
+            "title": "Direction",
+            "default": "high"
+          },
+          "warning": {
+            "type": "number",
+            "maximum": 1000000000.0,
+            "minimum": -1000000000.0,
+            "title": "Warning"
+          },
+          "alarm": {
+            "type": "number",
+            "maximum": 1000000000.0,
+            "minimum": -1000000000.0,
+            "title": "Alarm"
+          },
+          "hysteresis": {
+            "type": "number",
+            "maximum": 1000000000.0,
+            "minimum": 0.0,
+            "title": "Hysteresis",
+            "default": 0
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "metric",
+          "label",
+          "warning",
+          "alarm"
+        ],
+        "title": "Threshold"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "VehicleQuality": {
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "maxLength": 64,
+            "title": "Timestamp"
+          },
+          "record_id": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Record Id"
+          },
+          "brand": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Brand"
+          },
+          "model": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Model"
+          },
+          "color": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Color"
+          },
+          "quantity": {
+            "type": "integer",
+            "maximum": 1000000.0,
+            "minimum": 1.0,
+            "title": "Quantity"
+          },
+          "rejected": {
+            "type": "integer",
+            "maximum": 1000000.0,
+            "minimum": 0.0,
+            "title": "Rejected"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "timestamp",
+          "record_id",
+          "brand",
+          "model",
+          "color",
+          "quantity",
+          "rejected"
+        ],
+        "title": "VehicleQuality"
+      }
+    }
+  }
+}

@@ -22,4 +22,5 @@ docker run -p 7860:7860 -e JURY_PASSWORD="ваша парольная фраза
 За HTTPS-прокси задайте `PUBLIC_ORIGIN=https://ваш-адрес` (Render и Hugging Face определяются автоматически).
 
 Переменные: `JURY_PASSWORD` (обязательно), `JURY_USERNAME` (по умолчанию `jury`), `JURY_ROLE` = `operator` или `viewer`,
-`AUTOPLAY=false` — не запускать модель автоматически. Локальный ИИ (Ollama) в демо не запускается.
+`AUTOPLAY=false` — не запускать модель автоматически. Локальный ИИ (Ollama) в демо не запускается,
+поэтому мониторинг роботов работает по правилам (`MONITORING_AI_ENABLED=false` по умолчанию).

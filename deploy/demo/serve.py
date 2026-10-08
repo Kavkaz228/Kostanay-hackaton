@@ -31,6 +31,8 @@ if not os.getenv('PUBLIC_ORIGIN') and os.getenv('RENDER_EXTERNAL_URL'):
     os.environ['PUBLIC_ORIGIN'] = os.environ['RENDER_EXTERNAL_URL'].rstrip('/')
 os.environ.setdefault('COOKIE_SECURE', 'true' if os.getenv('PUBLIC_ORIGIN', '').startswith('https://') else 'false')
 os.environ.setdefault('DATABASE_URL', 'sqlite:////tmp/allur-twin-demo.db')
+# The online demo has no local AI server: robot monitoring keeps working on its rules only.
+os.environ.setdefault('MONITORING_AI_ENABLED', 'false')
 
 import uvicorn  # noqa: E402
 from fastapi import HTTPException  # noqa: E402

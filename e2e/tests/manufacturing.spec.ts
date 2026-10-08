@@ -15,7 +15,7 @@ test('case report and vehicle quality keep plans separate from inspected cars',a
   await page.getByLabel('Количество автомобилей',{exact:true}).fill('12');
   await page.getByLabel('Количество брака',{exact:true}).fill('2');
   await page.getByRole('button',{name:'Сохранить проверку',exact:true}).click();
-  await expect(page.getByRole('status')).toContainText('Сохранено 1');
+  await expect(page.locator('.manufacturing-page').getByRole('status')).toContainText('Сохранено 1');
   await page.getByRole('searchbox',{name:'Поиск по марке, модели или цвету'}).fill(brand);
   const row=page.locator('tr').filter({hasText:brand}).first();
   await expect(row).toContainText('Sedan One');await expect(row).toContainText('Белый');

@@ -16,13 +16,15 @@ import { ThemeToggle } from './Theme';
 import { LocalAI } from './LocalAI';
 import { ScadaPage } from './Scada';
 import { AnimatedNumber } from './Motion';
+import { MonitoringBadge, MonitoringNotice, MonitoringPage, useMonitoring } from './Monitoring';
 
-type Page = 'overview' | 'quality' | 'automation' | 'scada' | 'ai' | 'scenarios' | 'incidents' | 'data';
+type Page = 'overview' | 'quality' | 'automation' | 'scada' | 'monitoring' | 'ai' | 'scenarios' | 'incidents' | 'data';
 const navigation: {id: Page; title: string; icon: IconName}[] = [
   {id: 'overview', title: 'Обзор производства', icon: 'grid'},
   {id: 'quality', title: 'Контроль качества', icon: 'check'},
   {id: 'automation', title: 'Автоматизация', icon: 'gear'},
   {id: 'scada', title: 'Оборудование и ТО', icon: 'layers'},
+  {id: 'monitoring', title: 'Мониторинг роботов', icon: 'bell'},
   {id: 'ai', title: 'Локальный ИИ', icon: 'activity'},
   {id: 'scenarios', title: 'Сценарии', icon: 'flask'},
   {id: 'incidents', title: 'Инциденты', icon: 'bell'},
@@ -33,6 +35,7 @@ const pageDescriptions: Record<Page, string> = {
   quality: 'Проверенные автомобили: марка, модель, цвет, количество и результат.',
   automation: 'Сварка, покраска и сборка. Показания, расходные материалы и состояние роботов.',
   scada: 'Узлы роботов и конвейеров, ресурс, обслуживание и запасные части.',
+  monitoring: 'Отклонения в показаниях, рекомендации и реакция сотрудников.',
   ai: 'Локальный анализ данных и проверяемые предложения действий.',
   scenarios: 'Проверяйте решения и оценивайте их влияние на выпуск.',
   incidents: 'События на линии, причины и состояние реакции.',
@@ -41,6 +44,7 @@ const pageDescriptions: Record<Page, string> = {
 type Action = <T>(key: string, operation: () => Promise<T>, success?: string) => Promise<T | undefined>;
 
 export default function App({account, canWrite = true}: {account?: ReactNode; canWrite?: boolean}) {
+  const monitoring = useMonitoring();
   const [page, setPage] = useState<Page>('overview');
   const [state, setState] = useState<TwinState | null>(null);
   const [history, setHistory] = useState<HistoryPoint[]>([]);
@@ -87,7 +91,7 @@ export default function App({account, canWrite = true}: {account?: ReactNode; ca
     if (next) updateState(next);
   };
   const closeEditor = useCallback(() => setSelectedStation(null), []);
-  const independentPage = ['quality', 'automation', 'scada', 'ai'].includes(page);
+  const independentPage = ['quality', 'automation', 'scada', 'monitoring', 'ai'].includes(page);
   const openIncidents = incidents.filter(item => item.status !== 'resolved');
   const currentStation = state?.stations?.find(item => item.id === selectedStation);
   // Continuous motion (flow along the line, pulsing status lights) only plays while the model really runs.
@@ -126,13 +130,15 @@ export default function App({account, canWrite = true}: {account?: ReactNode; ca
       <a href="#overview" className="brand" onClick={event => {event.preventDefault(); navigate('overview');}} aria-label="Allur twin 2.0 — обзор"><span className="brand-symbol"><i/><i/><i/></span><span>allur<span className="brand-twin">twin</span><small>PRODUCTION INTELLIGENCE</small></span></a>
       <div className="site-selector"><span className="site-icon"><Icon name="factory" size={19}/></span><span><strong>Производственная линия</strong><small>Цифровая модель · Allur</small></span><span className="site-dot"/></div>
       <span className="nav-label">РАБОЧЕЕ ПРОСТРАНСТВО</span>
-      <nav ref={navRef} className={indicator ? 'has-indicator' : undefined} aria-label="Основная навигация">{indicator && <span className="nav-indicator" aria-hidden="true" style={{transform: `translateY(${indicator.top}px)`, height: indicator.height}}/>}{navigation.map(item => <button type="button" key={item.id} data-testid={`nav-${item.id}`} className={`nav-item ${page === item.id ? 'active' : ''}`} onClick={() => navigate(item.id)} aria-current={page === item.id ? 'page' : undefined}><Icon name={item.icon} size={19}/><span>{item.title}</span>{item.id === 'incidents' && openIncidents.length > 0 && <span className="nav-count" key={openIncidents.length}>{openIncidents.length}</span>}</button>)}</nav>
+      <nav ref={navRef} className={indicator ? 'has-indicator' : undefined} aria-label="Основная навигация">{indicator && <span className="nav-indicator" aria-hidden="true" style={{transform: `translateY(${indicator.top}px)`, height: indicator.height}}/>}{navigation.map(item => <button type="button" key={item.id} data-testid={`nav-${item.id}`} className={`nav-item ${page === item.id ? 'active' : ''}`} onClick={() => navigate(item.id)} aria-current={page === item.id ? 'page' : undefined}><Icon name={item.icon} size={19}/><span>{item.title}</span>{item.id === 'monitoring' && Boolean(monitoring.data?.unread_count) && <span className="nav-count" title="Ожидают сотрудника">{monitoring.data?.unread_count}</span>}{item.id === 'incidents' && openIncidents.length > 0 && <span className="nav-count" key={openIncidents.length}>{openIncidents.length}</span>}</button>)}</nav>
       <div className="sidebar-bottom"><div className="model-status"><span className={`status-light ${connectionError ? 'offline' : ''}`}/><span>{connectionError ? 'Связь прервана' : state ? 'Система доступна' : 'Подключение…'}</span></div><p>Данные модели отделены<br/>от импортированной телеметрии.</p><div className="sidebar-footer"><span className="avatar">AT</span><span><strong>Пульт управления</strong><small>Allur twin 2.0</small></span><Icon name="gear" size={18}/></div></div>
     </aside>
-    <div className="main-shell"><header className="topbar"><div className="breadcrumb"><button type="button" className="icon-button mobile-menu" aria-label="Открыть меню" aria-controls="main-sidebar" aria-expanded={menuOpen} onClick={() => setMenuOpen(true)}><Icon name="menu"/></button><span>Рабочее пространство</span><Icon name="chevron" size={13}/><strong>{navigation.find(item => item.id === page)?.title}</strong></div><div className="topbar-right"><ThemeToggle/><span className="timezone">UTC+5</span><span className="topbar-separator"/><Icon name="clock" size={15}/><span>{state ? date(state.updated_at) : 'Соединение…'}</span>{account}</div></header>
-    <main id="main-content"><div className="page-heading"><div className="page-heading-copy" key={page}><div className="heading-kicker"><span/> ALLUR DIGITAL TWIN</div><h1>{page === 'overview' ? 'Обзор производства' : navigation.find(item => item.id === page)?.title}</h1><p>{pageDescriptions[page]}</p></div><div className="heading-actions">{state && !independentPage && <span data-testid="source-label" className={`source-badge ${state.source}`}><Icon name={state.source === 'simulation' ? 'flask' : 'database'} size={15}/>{state.source === 'simulation' ? 'Симуляция' : 'Телеметрия CSV / API'}</span>}<button type="button" className="button secondary compact" aria-label="Обновить данные" onClick={() => void refresh()}><Icon name="refresh" size={17}/></button></div></div>
+    <div className="main-shell"><header className="topbar"><div className="breadcrumb"><button type="button" className="icon-button mobile-menu" aria-label="Открыть меню" aria-controls="main-sidebar" aria-expanded={menuOpen} onClick={() => setMenuOpen(true)}><Icon name="menu"/></button><span>Рабочее пространство</span><Icon name="chevron" size={13}/><strong>{navigation.find(item => item.id === page)?.title}</strong></div><div className="topbar-right"><MonitoringBadge monitoring={monitoring} onOpen={() => navigate('monitoring')}/><ThemeToggle/><span className="timezone">UTC+5</span><span className="topbar-separator"/><Icon name="clock" size={15}/><span>{state ? date(state.updated_at) : 'Соединение…'}</span>{account}</div></header>
+    <main id="main-content"><div className="page-heading"><div className="page-heading-copy" key={page}><div className="heading-kicker"><span/> ALLUR DIGITAL TWIN</div><h1>{page === 'overview' ? 'Обзор производства' : navigation.find(item => item.id === page)?.title}</h1><p>{pageDescriptions[page]}</p></div><div className="heading-actions">{state && !independentPage && <span data-testid="source-label" className={`source-badge ${state.source}`}><Icon name={state.source === 'simulation' ? 'flask' : 'database'} size={15}/>{state.source === 'simulation' ? 'Симуляция' : 'Телеметрия CSV / API'}</span>}<button type="button" className="button secondary compact" aria-label="Обновить данные" onClick={() => {void refresh(); void monitoring.refresh();}}><Icon name="refresh" size={17}/></button></div></div>
       {connectionError && <div className="connection-banner" role="alert"><Icon name="warning" size={18}/><span><strong>Данные могут быть устаревшими.</strong> {connectionError} Автоматически повторяем подключение.</span></div>}
-      {!state ? <div className="loading-panel"><span className="loading-bars" aria-hidden="true"><i/><i/><i/></span><h2>{connectionError ? 'Ожидаем соединение с сервером' : 'Подключаем производственную модель'}</h2><p>Загружаем участки, показатели и историю событий.</p></div> : <>
+      {(monitoring.error || monitoring.data?.last_error) && <div className="connection-banner monitoring-connection" role="alert"><Icon name="warning" size={18}/><span><strong>Мониторинг роботов: данные могут быть устаревшими.</strong> {monitoring.error || monitoring.data?.last_error} Повторяем подключение автоматически.</span></div>}
+      {page === 'monitoring' && <MonitoringPage monitoring={monitoring} canWrite={canWrite} onData={() => navigate('data')} onSettings={() => navigate(state?.telemetry_kind === 'robots' ? 'overview' : 'data')}/>}
+      {!state && page !== 'monitoring' ? <div className="loading-panel"><span className="loading-bars" aria-hidden="true"><i/><i/><i/></span><h2>{connectionError ? 'Ожидаем соединение с сервером' : 'Подключаем производственную модель'}</h2><p>Загружаем участки, показатели и историю событий.</p></div> : state ? <>
         {!independentPage && <div className="shift-toolbar"><div className="shift-clock"><span className={`status-light ${state.running && state.source === 'simulation' ? '' : 'paused'}`}/><strong>{state.source === 'telemetry' ? 'История наблюдений' : state.running ? 'Модель работает' : 'Модель на паузе'}</strong><span className="toolbar-divider"/><Icon name="clock" size={15}/><span data-testid="sim-time" className="mono">{elapsed(state.sim_time)}</span><span className="muted">/ {elapsed(state.shift_duration)}</span></div><div className="model-controls"><label className="speed-control"><span>Скорость</span><select data-testid="control-speed" aria-label="Скорость симуляции" value={state.speed} disabled={!canWrite || Boolean(busy) || state.source !== 'simulation'} onChange={event => void control({speed: Number(event.target.value)})}>{[1,10,30,60,120].map(speed => <option key={speed} value={speed}>×{speed}</option>)}</select></label><button data-testid="control-advance" className="button tertiary compact" type="button" disabled={!canWrite || Boolean(busy) || state.source !== 'simulation'} onClick={async () => {const next = await action('advance', () => post<TwinState>('/advance', {seconds: 600})); if (next) updateState(next);}} title="Продвинуть модель на 10 минут"><Icon name="clock" size={15}/>+10 мин</button><button data-testid="control-running" className="button light compact" type="button" disabled={!canWrite || Boolean(busy) || state.source !== 'simulation'} onClick={() => void control({running: !state.running})}><Icon name={state.running ? 'pause' : 'play'} size={14}/>{state.running ? 'Пауза' : 'Запустить'}</button></div></div>}
         {page === 'overview' && state.telemetry_kind === 'robots' && <Robots state={state}/>} 
         {page === 'overview' && state.telemetry_kind !== 'robots' && <Overview state={state} history={history} incidents={incidents} onStation={openStation} onScenarios={() => navigate('scenarios')} onIncidents={() => navigate('incidents')}/>}
@@ -143,9 +149,10 @@ export default function App({account, canWrite = true}: {account?: ReactNode; ca
         {page === 'scada' && <ScadaPage/>}
         {page === 'incidents' && <Incidents incidents={incidents} busy={busy} onAcknowledge={async id => {const item = await action('acknowledge', () => post<Incident>(`/incidents/${encodeURIComponent(id)}/acknowledge`, {}), 'Инцидент принят в работу'); if (item) setIncidents(items => items.map(value => value.id === id ? item : value));}}/>}
         {page === 'data' && <DataSettings state={state} busy={busy} action={action} onState={updateState} onRefresh={refresh}/>}
-      </>}
-      <footer className="main-footer"><span><Icon name="layers" size={13}/> ALLUR TWIN</span><span>{independentPage ? 'Отчёты, записи контроля и показания оборудования.' : state?.source === 'simulation' ? 'Расчёты основаны на модели. Заводское подключение не настроено.' : 'Значения из CSV. Пропуски обозначены «—».'}</span><span>Обновление каждые 2 сек</span></footer>
+      </> : null}
+      <footer className="main-footer"><span><Icon name="layers" size={13}/> ALLUR TWIN</span><span>{independentPage ? 'Отчёты, записи контроля и показания оборудования.' : state?.source === 'simulation' ? 'Расчёты основаны на модели. Заводское подключение не настроено.' : 'Значения из CSV. Пропуски обозначены «—».'}</span><span>{page === 'monitoring' ? 'События: каждые 10 сек' : 'Обновление каждые 2 сек'}</span></footer>
     </main></div>
+    <MonitoringNotice monitoring={monitoring} onOpen={() => navigate('monitoring')}/>
     {currentStation && <StationEditor key={currentStation.id} station={currentStation} telemetry={state?.source === 'telemetry'} onClose={closeEditor} onSaved={next => {updateState(next); setToast({type: 'success', message: 'Параметры участка обновлены'}); void refresh();}}/>}
     {toast && <div key={toastKey} data-testid="toast" className={`toast ${toast.type}`} role={toast.type === 'error' ? 'alert' : 'status'}><Icon name={toast.type === 'error' ? 'warning' : 'check'} size={20}/><span>{toast.message}</span><button className="icon-button" onClick={() => setToast(null)} aria-label="Закрыть уведомление"><Icon name="close" size={16}/></button><span className="toast-timer" aria-hidden="true" style={{animationDuration: toast.type === 'error' ? '15s' : '5s'}}/></div>}
   </div>;

@@ -81,7 +81,7 @@ docker compose restart api
 Использованные технические рекомендации: [OWASP — хранение паролей](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html), [OWASP — управление сессиями](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html), [Docker Compose secrets](https://docs.docker.com/compose/how-tos/use-secrets/), [PostgreSQL 17 pg_dump](https://www.postgresql.org/docs/17/app-pgdump.html).
 
 
-## Дополнения версии 2.1
+## Дополнения платформы
 
 Контроль качества, отчёты кейса, команды и ключи шлюзов добавляются отдельными таблицами автоматически; существующие измерения и состояние симуляции сохраняются. Перед обновлением обязательна копия базы. Для запуска ИИ используется ./start-ai.ps1; том ollama_models сохраняет веса отдельно от PostgreSQL. Закрытая сеть inference не должна подключаться к внешнему маршруту в рабочем размещении.
 

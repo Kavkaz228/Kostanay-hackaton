@@ -24,6 +24,7 @@ from .robots import FIELDS as ROBOT_FIELDS
 from .manufacturing import QualityBatch, QUALITY_FIELDS
 from .automation import router as automation_router
 from .local_ai import router as ai_router
+from .monitoring import Monitoring, router as monitoring_router
 from .scada import router as scada_router
 from .emulation import router as emulation_router
 from .security import Security, router as security_router, actor_context
@@ -42,12 +43,15 @@ def create_app(database_url=None, runner_enabled=None):
     @asynccontextmanager
     async def lifespan(application):
         application.state.service = Service(url)
+        application.state.monitoring = Monitoring(application.state.service)
         try:
             application.state.security = Security(application.state.service.sessions)
             if run:
                 application.state.service.start()
+                application.state.monitoring.start()
             yield
         finally:
+            application.state.monitoring.close()
             application.state.service.close()
 
     application = FastAPI(title=APP_NAME, description="Модель производства и импорт измерений", version=APP_VERSION, lifespan=lifespan,
@@ -55,6 +59,7 @@ def create_app(database_url=None, runner_enabled=None):
     application.include_router(security_router)
     application.include_router(automation_router)
     application.include_router(ai_router)
+    application.include_router(monitoring_router)
     application.include_router(scada_router)
     application.include_router(emulation_router)
     heavy_slots = threading.BoundedSemaphore(4)
